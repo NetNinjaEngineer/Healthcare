@@ -4,9 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Healthcare.Infrastructure;
-internal static class DependencyInjectionExtensions
+public static class InfrastructureServicesRegistration
 {
-    public static IServiceCollection AddInfrastructurePart(
+    public static IServiceCollection AddInfrastructureServices(
         this IServiceCollection services,
         IConfiguration configuration)
     {

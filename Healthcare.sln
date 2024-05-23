@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9581F254-B23
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F79CA88A-F502-4ACE-B220-076486859327}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healtthcare.Application", "Healtthcare.Application\Healtthcare.Application.csproj", "{BBA7D03E-965B-4324-A5B0-EC19A3FE9AAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.Application", "Healtthcare.Application\Healthcare.Application.csproj", "{BBA7D03E-965B-4324-A5B0-EC19A3FE9AAA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.Domain", "Healthcare.Domain\Healthcare.Domain.csproj", "{DD3C426E-F699-4F05-91F8-7758CB732EE7}"
 EndProject
@@ -19,17 +19,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{2676514E-0E6F-44A7-A3A3-85B99CDF8245}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Healthcare.WebUI", "Healthcare.WebUI\Healthcare.WebUI.csproj", "{81596A62-C307-40A7-A4C8-8A5683BE48AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.WebUI", "Healthcare.WebUI\Healthcare.WebUI.csproj", "{81596A62-C307-40A7-A4C8-8A5683BE48AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Healthcare.Domain.UnitTests", "Healthcare.Domain.UnitTests\Healthcare.Domain.UnitTests.csproj", "{CADB25EF-3A15-42C6-9256-A068020B2B23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.Domain.UnitTests", "Healthcare.Domain.UnitTests\Healthcare.Domain.UnitTests.csproj", "{CADB25EF-3A15-42C6-9256-A068020B2B23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Healthcare.Application.UnitTests", "Healthcare.Application.UnitTests\Healthcare.Application.UnitTests.csproj", "{ACFB5524-C954-4066-84CE-2B36DE820FD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.Application.UnitTests", "Healthcare.Application.UnitTests\Healthcare.Application.UnitTests.csproj", "{ACFB5524-C954-4066-84CE-2B36DE820FD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Healthcare.Api.IntegrationTests", "Healthcare.Api.IntegrationTests\Healthcare.Api.IntegrationTests.csproj", "{57648A82-B297-47B0-83A2-001B487E28ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.Api.IntegrationTests", "Healthcare.Api.IntegrationTests\Healthcare.Api.IntegrationTests.csproj", "{57648A82-B297-47B0-83A2-001B487E28ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Healthcare.Application.IntegrationTests", "Healthcare.Application.IntegrationTests\Healthcare.Application.IntegrationTests.csproj", "{E9E74456-2082-4C1C-8EEF-033EB57F0CF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.Application.IntegrationTests", "Healthcare.Application.IntegrationTests\Healthcare.Application.IntegrationTests.csproj", "{E9E74456-2082-4C1C-8EEF-033EB57F0CF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Healthcare.WebUI.IntegrationTests", "Healthcare.WebUI.IntegrationTests\Healthcare.WebUI.IntegrationTests.csproj", "{B934E7ED-78E6-408C-A368-05824A5394E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.WebUI.IntegrationTests", "Healthcare.WebUI.IntegrationTests\Healthcare.WebUI.IntegrationTests.csproj", "{B934E7ED-78E6-408C-A368-05824A5394E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

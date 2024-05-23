@@ -1,4 +1,4 @@
-namespace Healthcare.WebUI.Models;
+namespace Healthcare.WebUI.Client.Models;
 
 public class ErrorViewModel
 {
