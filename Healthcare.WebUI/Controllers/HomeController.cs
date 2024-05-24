@@ -1,6 +1,6 @@
-using System.Diagnostics;
+using Healthcare.WebUI.Client.Models;
 using Microsoft.AspNetCore.Mvc;
-using Healthcare.WebUI.Models;
+using System.Diagnostics;
 
 namespace Healthcare.WebUI.Controllers;
 

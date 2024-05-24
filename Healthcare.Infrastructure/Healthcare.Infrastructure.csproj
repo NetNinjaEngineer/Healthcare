@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Persistence\Configurations\" />
     <Folder Include="Persistence\Repositories\" />
     <Folder Include="Services\" />
   </ItemGroup>
@@ -24,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Healthcare.Application\Healthcare.Application.csproj" />
+    <ProjectReference Include="..\Healthcare.Domain\Healthcare.Domain.csproj" />
   </ItemGroup>
 
 </Project>
