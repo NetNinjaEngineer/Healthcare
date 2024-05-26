@@ -1,0 +1,96 @@
+﻿@using Healthcare.Domain.Entities
+@if (IsVisible)
+{
+    <div class="modal" style="display:block">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Employee @string.Concat(Employee.FirstName, " ", Employee.LastName)</h5>
+                    <button type="button" class="btn-close" @onclick="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" @bind="Employee.FirstName" @oninput="UpdateFirstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" @bind="Employee.LastName">
+                    </div>
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title</label>
+                        <input type="text" class="form-control" id="jobTitle" @bind="Employee.JobTitle">
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label>Gender:</label>
+                            <br />
+                            <label>
+                                <input type="radio" name="gender" value="@Gender.Male" @onchange="OnGenderChanged"/>
+                                Male
+                            </label><br/>
+                            <label>
+                                <input type="radio" name="gender" value="@Gender.Female" @onchange="OnGenderChanged" />
+                                Female
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="hireDate">Hire Date</label>
+                        <input type="date" class="form-control" id="hireDate" @bind="Employee.HireDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="salary">Salary</label>
+                        <input type="number" class="form-control" id="salary" @bind="Employee.Salary">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateOfBirth">Date Of Birth</label>
+                        <input type="date" class="form-control" id="dateOfBirth" @bind="Employee.DateOfBirth">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="Close">Close</button>
+                    <button type="button" class="btn btn-primary" @onclick="Save">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>Fullname is: @string.Concat(Employee.FirstName, " ", Employee.LastName)</div>
+
+}
+
+
+@code {
+    [Parameter]
+    public Domain.Entities.Employee Employee { get; set; } = null!;
+
+    [Parameter]
+    public bool IsVisible { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnClose { get; set; }
+
+    [Parameter]
+    public EventCallback<Domain.Entities.Employee> OnSave { get; set; }
+
+    public void Close()
+    {
+        OnClose.InvokeAsync(false);
+    }
+
+    private async Task Save()
+    {
+        await OnSave.InvokeAsync(Employee);
+        Close();
+    }
+
+    private void OnGenderChanged(ChangeEventArgs e)
+    {
+        Employee.Gender = (Gender)Enum.Parse<Gender>(e.Value.ToString());
+    }
+    private void UpdateFirstName(ChangeEventArgs e)
+    {
+        Employee.FirstName = e.Value.ToString();
+    }
+}

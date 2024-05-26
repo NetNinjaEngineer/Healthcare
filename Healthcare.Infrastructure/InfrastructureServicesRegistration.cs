@@ -1,4 +1,6 @@
-﻿using Healthcare.Infrastructure.Persistence;
+﻿using Healthcare.Application.Interfaces;
+using Healthcare.Infrastructure.Persistence;
+using Healthcare.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +14,8 @@ public static class InfrastructureServicesRegistration
     {
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
         return services;
     }

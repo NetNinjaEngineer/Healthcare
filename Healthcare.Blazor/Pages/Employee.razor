@@ -1,0 +1,98 @@
+﻿@page "/employees";
+
+@inject HttpClient httpClient;
+
+
+<PageTitle>Employees</PageTitle>
+@if(_employees is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Job Title</th>
+                <th>Gender</th>
+                <th>HireDate</th>
+                <th>Salary</th>
+                <th>DateOfBirth</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in _employees)
+            {
+                <tr>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.LastName</td>
+                    <td>@employee.JobTitle</td>
+                    <td>@employee.Gender</td>
+                    <td>@employee.HireDate</td>
+                    <td>@employee.Salary.ToString("C")</td>
+                    <td>@employee.DateOfBirth</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="() => EditEmployee(employee)">Edit</button>
+                        <button class="btn btn-danger" @onclick="() => DeleteEmployee(employee.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <EditEmployee IsVisible="_isEditModalVisible"
+                  Employee="_selectedEmployee"
+                  OnClose="CloseEditModal"
+                  OnSave="SaveEmployee">
+    </EditEmployee>
+
+}
+
+
+
+@code {
+    private List<Domain.Entities.Employee> _employees = [];
+    private bool _isEditModalVisible = false;
+    private Domain.Entities.Employee _selectedEmployee = new Domain.Entities.Employee();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _employees = await httpClient.GetFromJsonAsync<List<Domain.Entities.Employee>>("api/employees");
+    }
+
+
+    private async Task EditEmployee(Domain.Entities.Employee employee)
+    {
+        _selectedEmployee = employee;
+        _isEditModalVisible = true;
+    }
+
+    private async Task SaveEmployee(Domain.Entities.Employee employee)
+    {
+        var response = await httpClient.PutAsJsonAsync($"api/employees/{employee.Id}", employee);
+        if (response.IsSuccessStatusCode)
+        {
+            var index = _employees.FindIndex(e => e.Id == employee.Id);
+            if (index != -1)
+            {
+                _employees[index] = employee;
+            }
+        }
+    }
+
+    private void CloseEditModal(bool isVisible)
+    {
+        _isEditModalVisible = isVisible;
+    }
+
+
+    private async Task DeleteEmployee(int id)
+    {
+        
+    }
+
+
+}

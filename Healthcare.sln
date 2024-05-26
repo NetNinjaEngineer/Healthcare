@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.WebUI.Integratio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.Application", "Healthcare.Application\Healthcare.Application.csproj", "{3DF4C157-B9B2-4DFF-AF06-9D324AC19BF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Healthcare.Blazor", "Healthcare.Blazor\Healthcare.Blazor.csproj", "{E8B2DAFE-9C0C-4C96-8DBF-7CD8F0E0923C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.Blazor", "Healthcare.Blazor\Healthcare.Blazor.csproj", "{E8B2DAFE-9C0C-4C96-8DBF-7CD8F0E0923C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
