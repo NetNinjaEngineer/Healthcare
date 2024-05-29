@@ -1,6 +1,7 @@
 ﻿using Healthcare.Application.Commands.CreateEmployee;
 using Healthcare.Application.DTOs;
 using Healthcare.Application.Queries.GetAllEmployees;
+using Healthcare.Application.Queries.GetEmployeeDetails;
 using Healthcare.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,5 +18,9 @@ public class EmployeesController(IMediator mediator) : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         => Ok(await mediator.Send(new GetAllEmployeesQuery()));
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee(int id)
+    => Ok(await mediator.Send(new GetEmployeeDetailsQuery(id)));
 
 }

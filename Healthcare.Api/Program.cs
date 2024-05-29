@@ -1,4 +1,5 @@
 using Healthcare.Application;
+using Healthcare.Application.Middleware;
 using Healthcare.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<LoggingMiddleware>();
 
 app.UseCors(c => c.AllowAnyHeader()
     .AllowAnyMethod()
