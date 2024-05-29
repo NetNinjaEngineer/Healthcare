@@ -1,10 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using Healthcare.Application.Interfaces;
+using Healthcare.Domain.Exceptions;
+using MediatR;
 
 namespace Healthcare.Application.Commands.UpdateEmployee;
-internal class UpdateEmployeeCommandHandler
+public sealed class UpdateEmployeeCommandHandler(
+        IUnitOfWork unitOfWork,
+        IMapper mapper
+    ) : IRequestHandler<UpdateEmployeeCommand, Unit>
 {
+    public async Task<Unit> Handle(UpdateEmployeeCommand request,
+        CancellationToken cancellationToken)
+    {
+        var employee = await unitOfWork.EmployeeRepository
+            .GetByIdAsync(request.EmployeeId)
+            ?? throw new EmployeeNotFoundException($"employee with id: {request.EmployeeId} was not found.");
+
+        mapper.Map(request.UpdatedEmployee, employee);
+
+        unitOfWork.EmployeeRepository.Update(employee);
+
+        await unitOfWork.CommitAsync();
+
+        return Unit.Value;
+
+    }
 }

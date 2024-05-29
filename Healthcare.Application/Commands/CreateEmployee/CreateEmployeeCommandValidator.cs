@@ -2,7 +2,7 @@
 using Healthcare.Application.DTOs;
 
 namespace Healthcare.Application.Commands.CreateEmployee;
-public sealed class CreateEmployeeCommandValidator : AbstractValidator<EmployeeForCreateDto>
+public sealed class CreateEmployeeCommandValidator : AbstractValidator<EmployeeForManipulateDto>
 {
     public CreateEmployeeCommandValidator()
     {

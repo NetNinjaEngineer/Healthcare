@@ -1,4 +1,5 @@
 ﻿using Healthcare.Application.Commands.CreateEmployee;
+using Healthcare.Application.Commands.UpdateEmployee;
 using Healthcare.Application.DTOs;
 using Healthcare.Application.Queries.GetAllEmployees;
 using Healthcare.Application.Queries.GetEmployeeDetails;
@@ -21,6 +22,14 @@ public class EmployeesController(IMediator mediator) : ControllerBase
 
     [HttpGet("{id}")]
     public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee(int id)
-    => Ok(await mediator.Send(new GetEmployeeDetailsQuery(id)));
+        => Ok(await mediator.Send(new GetEmployeeDetailsQuery(id)));
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<IEnumerable<Employee>>> UpdateEmployee(int id,
+        EmployeeForUpdateDto updatedEmployee)
+    {
+        await mediator.Send(new UpdateEmployeeCommand { EmployeeId = id, UpdatedEmployee = updatedEmployee });
+        return NoContent();
+    }
 
 }
