@@ -1,10 +1,9 @@
 ﻿using Healthcare.Domain.Entities;
 
 namespace Healthcare.Application.DTOs;
-
-public sealed record EmployeeForCreateDto : EmployeeForManipulateDto
+public sealed record EmployeeForUpdateDto : EmployeeForManipulateDto
 {
-    public EmployeeForCreateDto(
+    public EmployeeForUpdateDto(
         string FirstName,
         string LastName,
         string JobTitle,

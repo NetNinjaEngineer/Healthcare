@@ -2,9 +2,7 @@
 using Healthcare.Domain.Entities;
 
 namespace Healthcare.Infrastructure.Persistence.Repositories;
-public sealed class EmployeeRepository : GenericRepository<Employee>, IEmployeeRepository
+public sealed class EmployeeRepository(ApplicationDbContext context)
+    : GenericRepository<Employee>(context), IEmployeeRepository
 {
-    public EmployeeRepository(ApplicationDbContext context) : base(context)
-    {
-    }
 }
