@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Healthcare.Application.Commands.CreateEmployee;
 public sealed class CreateEmployeeCommandHandler(
-    IEmployeeRepository employeeRepository,
+    IUnitOfWork unitOfWork,
     IMapper mapper
     ) : IRequestHandler<CreateEmployeeCommand, int>
 {
@@ -20,9 +20,9 @@ public sealed class CreateEmployeeCommandHandler(
 
         var employee = mapper.Map<Employee>(request.Employee);
 
-        employeeRepository.Create(employee);
+        unitOfWork.EmployeeRepository.Create(employee);
 
-        await employeeRepository.SaveChangesAsync();
+        await unitOfWork.CommitAsync();
 
         new EmployeeCreatedDomainEventHandler().Handle(new EmployeeCreatedEvent(employee.Id));
 

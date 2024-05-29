@@ -15,7 +15,9 @@ public static class InfrastructureServicesRegistration
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }
