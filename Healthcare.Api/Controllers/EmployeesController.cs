@@ -1,5 +1,6 @@
 ﻿using Healthcare.Application.Commands.CreateEmployee;
 using Healthcare.Application.Commands.DeleteEmployee;
+using Healthcare.Application.Commands.PromoteEmployee;
 using Healthcare.Application.Commands.UpdateEmployee;
 using Healthcare.Application.DTOs;
 using Healthcare.Application.Queries.GetAllEmployees;
@@ -9,7 +10,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Healthcare.Api.Controllers;
-[Route("api/[controller]")]
+[Route("api/employees")]
 [ApiController]
 public class EmployeesController(IMediator mediator) : ControllerBase
 {
@@ -37,6 +38,14 @@ public class EmployeesController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         await mediator.Send(new DeleteEmployeeCommand { Id = id });
+        return NoContent();
+    }
+
+    [Route("promote/{id}")]
+    [HttpPut]
+    public async Task<IActionResult> PromoteEmployee(int id, [FromBody] PromoteEmployeeDto body)
+    {
+        await mediator.Send(new PromoteEmployeeCommand() { EmployeeId = id, PromoteEmployeeModel = body });
         return NoContent();
     }
 
