@@ -1,4 +1,5 @@
 ﻿using Healthcare.Domain.Events;
+using Healthcare.Domain.Exceptions;
 using Healthcare.Domain.ValueObjects;
 
 namespace Healthcare.Domain.Entities;
@@ -89,10 +90,39 @@ public class Employee : BaseEntity
     public Gender GetGender() => _gender;
     public decimal GetSalary() => _salary;
 
+    public int GetEmployeeAge()
+    {
+        var today = DateTime.Today;
+        var age = today.Year - DateOfBirth.Year;
+
+        if (DateOfBirth.Date > today.AddYears(-age))
+            age--;
+        return age;
+    }
+
+    public void PromoteEmployee(decimal salaryIncrease)
+    {
+        if (salaryIncrease < 0)
+            throw new SalaryIncreaseException(ErrorMessages.SalaryIncreaseLessThanZero);
+
+        _salary += salaryIncrease;
+
+    }
+
+
     public void AddEmployeeCreatedDomainEvent(int employeeId)
     {
         var employeeCreatedDomainEvent = new EmployeeCreatedDomainEvent(employeeId);
 
         AddDomainEvent(employeeCreatedDomainEvent);
     }
+
+    public void AddEmployeePromotedDomainEvent(decimal salaryIncrease)
+    {
+        var employeePromotedDomainEvent = new EmployeePromotedDomainEvent(salaryIncrease, this);
+
+        AddDomainEvent(employeePromotedDomainEvent);
+    }
+
+
 }
