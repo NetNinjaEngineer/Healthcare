@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace Healthcare.Domain.Entities;
 public abstract class BaseEntity
 {
-    public int Id { get; set; }
+    public string Id { get; set; } = Guid.NewGuid().ToString();
 
     protected List<INotification> _domainEvents { get; private set; } = new List<INotification>();
 

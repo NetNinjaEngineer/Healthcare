@@ -13,12 +13,13 @@ public class Employee : BaseEntity
     private DateTime _dateOfBirth;
     private DateTime _hireDate;
     private Gender _gender;
+    private string _email;
 
     public Employee() { }
 
     public Employee(string firstName, string lastName, string phone,
         string jobTitle, decimal salary, DateTime dateOfBirth, DateTime hireDate,
-        Gender gender)
+        Gender gender, string email)
     {
         _firstName = firstName;
         _lastName = lastName;
@@ -28,8 +29,10 @@ public class Employee : BaseEntity
         _dateOfBirth = dateOfBirth;
         _hireDate = hireDate;
         _gender = gender;
+        _email = email;
 
         AddEmployeeCreatedDomainEvent(Id);
+        _email = email;
     }
 
     public string FirstName => _firstName;
@@ -40,10 +43,16 @@ public class Employee : BaseEntity
     public DateTime DateOfBirth => _dateOfBirth;
     public DateTime HireDate => _hireDate;
     public Gender Gender => _gender;
+    public string Email => _email;
 
     public void SetFirstName(string firstName)
     {
         _firstName = firstName;
+    }
+
+    public void SetEmail(string email)
+    {
+        _email = email;
     }
 
     public void SetLastName(string lastName)
@@ -89,6 +98,7 @@ public class Employee : BaseEntity
     public DateTime GetDateOfBirth() => _dateOfBirth;
     public Gender GetGender() => _gender;
     public decimal GetSalary() => _salary;
+    public string GetEmail() => _email;
 
     public int GetEmployeeAge()
     {
@@ -110,7 +120,7 @@ public class Employee : BaseEntity
     }
 
 
-    public void AddEmployeeCreatedDomainEvent(int employeeId)
+    public void AddEmployeeCreatedDomainEvent(string employeeId)
     {
         var employeeCreatedDomainEvent = new EmployeeCreatedDomainEvent(employeeId);
 

@@ -3,5 +3,5 @@
 namespace Healthcare.Application.Commands.DeleteEmployee;
 public sealed class DeleteEmployeeCommand : IRequest<Unit>
 {
-    public int Id { get; init; }
+    public string? Id { get; init; }
 }

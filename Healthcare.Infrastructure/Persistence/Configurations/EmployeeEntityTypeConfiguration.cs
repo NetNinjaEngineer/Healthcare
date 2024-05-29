@@ -24,6 +24,14 @@ public class EmployeeEntityTypeConfiguration : IEntityTypeConfiguration<Employee
             .IsRequired();
 
         employeeConfiguration
+            .Property<string>("_email")
+            .HasColumnName("Email")
+            .UsePropertyAccessMode(PropertyAccessMode.Field)
+            .HasColumnType("varchar")
+            .HasMaxLength(125)
+            .IsRequired();
+
+        employeeConfiguration
             .Property<string>("_jobTitle")
             .UsePropertyAccessMode(PropertyAccessMode.Field)
             .HasColumnName("JobTitle")

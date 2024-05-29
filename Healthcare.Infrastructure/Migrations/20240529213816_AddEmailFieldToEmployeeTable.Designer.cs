@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Healthcare.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240529190819_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240529213816_AddEmailFieldToEmployeeTable")]
+    partial class AddEmailFieldToEmployeeTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,15 +27,19 @@ namespace Healthcare.Infrastructure.Migrations
 
             modelBuilder.Entity("Healthcare.Domain.Entities.Employee", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("_dateOfBirth")
                         .HasColumnType("DATE")
                         .HasColumnName("DateOfBirth");
+
+                    b.Property<string>("_email")
+                        .IsRequired()
+                        .HasMaxLength(125)
+                        .HasColumnType("varchar")
+                        .HasColumnName("Email");
 
                     b.Property<string>("_firstName")
                         .IsRequired()

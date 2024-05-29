@@ -15,7 +15,7 @@ public sealed class GetEmployeeDetailsQueryHandler(
     {
         if (request.EmployeeId is not null)
         {
-            var employee = await unitOfWork.EmployeeRepository.GetByIdAsync(request.EmployeeId.Value);
+            var employee = await unitOfWork.EmployeeRepository.GetByIdAsync(request.EmployeeId);
             return employee is null
                 ? throw new EmployeeNotFoundException(ErrorMessages.EmployeeNotFound)
                 : employee;

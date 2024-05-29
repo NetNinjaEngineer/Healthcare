@@ -13,6 +13,9 @@ public sealed class UpdateEmployeeCommandHandler(
     public async Task<Unit> Handle(UpdateEmployeeCommand request,
         CancellationToken cancellationToken)
     {
+        if (request.EmployeeId is null)
+            throw new IdParameterNullException($"{nameof(request.EmployeeId)} is null");
+
         var employee = await unitOfWork.EmployeeRepository
             .GetByIdAsync(request.EmployeeId)
             ?? throw new EmployeeNotFoundException(ErrorMessages.EmployeeNotFound);

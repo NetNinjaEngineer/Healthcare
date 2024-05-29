@@ -8,9 +8,9 @@ namespace Healthcare.Application.Commands.CreateEmployee;
 public sealed class CreateEmployeeCommandHandler(
     IUnitOfWork unitOfWork,
     IMapper mapper
-    ) : IRequestHandler<CreateEmployeeCommand, int>
+    ) : IRequestHandler<CreateEmployeeCommand, string>
 {
-    public async Task<int> Handle(
+    public async Task<string> Handle(
         CreateEmployeeCommand request,
         CancellationToken cancellationToken)
     {

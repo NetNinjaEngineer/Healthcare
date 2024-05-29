@@ -12,6 +12,8 @@ public sealed class DeleteEmployeeCommandHandler(
         DeleteEmployeeCommand request,
         CancellationToken cancellationToken)
     {
+        if (request.Id is null)
+            throw new IdParameterNullException($"{nameof(request.Id)} is null.");
         var employee = await unitOfWork.EmployeeRepository.GetByIdAsync(request.Id)
             ?? throw new EmployeeNotFoundException(ErrorMessages.EmployeeNotFound);
         unitOfWork.EmployeeRepository.Delete(employee);

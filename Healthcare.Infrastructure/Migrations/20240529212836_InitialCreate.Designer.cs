@@ -4,6 +4,7 @@ using Healthcare.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Healthcare.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240529212836_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,12 +34,6 @@ namespace Healthcare.Infrastructure.Migrations
                     b.Property<DateTime>("_dateOfBirth")
                         .HasColumnType("DATE")
                         .HasColumnName("DateOfBirth");
-
-                    b.Property<string>("_email")
-                        .IsRequired()
-                        .HasMaxLength(125)
-                        .HasColumnType("varchar")
-                        .HasColumnName("Email");
 
                     b.Property<string>("_firstName")
                         .IsRequired()

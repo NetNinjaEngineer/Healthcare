@@ -19,10 +19,11 @@ public sealed class PromoteEmployeeCommandHandler
         _mediator = mediator;
     }
 
-    public async Task<Unit> Handle(
-        PromoteEmployeeCommand request,
+    public async Task<Unit> Handle(PromoteEmployeeCommand request,
         CancellationToken cancellationToken)
     {
+        if (request.EmployeeId == null)
+            throw new IdParameterNullException($"{request.EmployeeId} is null.");
         var employee = await _unitOfWork.EmployeeRepository
             .GetByIdAsync(request.EmployeeId)
             ?? throw new EmployeeNotFoundException(ErrorMessages.EmployeeNotFound);

@@ -16,7 +16,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
     public async Task<IEnumerable<TEntity>> GetAllAsync()
         => await _context.Set<TEntity>().ToListAsync();
 
-    public async Task<TEntity> GetByIdAsync(int id)
+    public async Task<TEntity> GetByIdAsync(string id)
         => await _context.Set<TEntity>().FindAsync(id) ?? default!;
 
     public void Update(TEntity entity) => _context.Update(entity);

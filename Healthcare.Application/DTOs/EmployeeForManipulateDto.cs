@@ -9,6 +9,7 @@ public abstract record EmployeeForManipulateDto(
     DateTime HireDate,
     DateTime DateOfBirth,
     decimal Salary,
-    Gender Gender)
+    Gender Gender,
+    string email)
 {
 }

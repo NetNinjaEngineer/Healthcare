@@ -23,11 +23,11 @@ public class EmployeesController(IMediator mediator) : ControllerBase
         => Ok(await mediator.Send(new GetAllEmployeesQuery()));
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee(int id)
+    public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee(string id)
         => Ok(await mediator.Send(new GetEmployeeDetailsQuery(id)));
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<IEnumerable<Employee>>> UpdateEmployee(int id,
+    public async Task<ActionResult<IEnumerable<Employee>>> UpdateEmployee(string id,
         EmployeeForUpdateDto updatedEmployee)
     {
         await mediator.Send(new UpdateEmployeeCommand { EmployeeId = id, UpdatedEmployee = updatedEmployee });
@@ -35,7 +35,7 @@ public class EmployeesController(IMediator mediator) : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(string id)
     {
         await mediator.Send(new DeleteEmployeeCommand { Id = id });
         return NoContent();
@@ -43,7 +43,7 @@ public class EmployeesController(IMediator mediator) : ControllerBase
 
     [Route("promote/{id}")]
     [HttpPut]
-    public async Task<IActionResult> PromoteEmployee(int id, [FromBody] PromoteEmployeeDto body)
+    public async Task<IActionResult> PromoteEmployee(string id, [FromBody] PromoteEmployeeDto body)
     {
         await mediator.Send(new PromoteEmployeeCommand() { EmployeeId = id, PromoteEmployeeModel = body });
         return NoContent();

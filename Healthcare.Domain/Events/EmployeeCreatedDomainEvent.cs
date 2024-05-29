@@ -3,9 +3,9 @@
 namespace Healthcare.Domain.Events;
 public sealed class EmployeeCreatedDomainEvent : INotification
 {
-    public int EmployeeId { get; private set; }
+    public string EmployeeId { get; private set; }
 
-    public EmployeeCreatedDomainEvent(int employeeId)
+    public EmployeeCreatedDomainEvent(string employeeId)
     {
         EmployeeId = employeeId;
     }
