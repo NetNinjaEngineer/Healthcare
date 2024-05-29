@@ -30,7 +30,7 @@ namespace Healthcare.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateOnly>("DateOfBirth")
+                    b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("DATE");
 
                     b.Property<string>("FirstName")
@@ -42,7 +42,7 @@ namespace Healthcare.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("HireDate")
+                    b.Property<DateTime>("HireDate")
                         .HasColumnType("DATE");
 
                     b.Property<string>("JobTitle")

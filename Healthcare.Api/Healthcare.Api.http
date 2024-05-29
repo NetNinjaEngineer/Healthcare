@@ -1,6 +1,10 @@
-@Healthcare.Api_HostAddress = http://localhost:5264
+@Healthcare.Api_HostAddress = https://localhost:7257
 
 GET {{Healthcare.Api_HostAddress}}/weatherforecast/
 Accept: application/json
+
+###
+
+GET {{Healthcare.Api_HostAddress}}/api/employees
 
 ###

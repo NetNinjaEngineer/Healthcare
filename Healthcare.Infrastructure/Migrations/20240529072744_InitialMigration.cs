@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Healthcare.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateEmployeeTable : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,9 +20,9 @@ namespace Healthcare.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     JobTitle = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
-                    HireDate = table.Column<DateOnly>(type: "DATE", nullable: false),
+                    HireDate = table.Column<DateTime>(type: "DATE", nullable: false),
                     Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DateOfBirth = table.Column<DateOnly>(type: "DATE", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "DATE", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
                 },

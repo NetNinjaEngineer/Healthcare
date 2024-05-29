@@ -1,48 +1,21 @@
-﻿using Healthcare.Application.Interfaces;
+﻿using Healthcare.Application.Commands.CreateEmployee;
+using Healthcare.Application.DTOs;
+using Healthcare.Application.Queries.GetAllEmployees;
 using Healthcare.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Healthcare.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class EmployeesController : ControllerBase
+public class EmployeesController(IMediator mediator) : ControllerBase
 {
-    private readonly IEmployeeRepository _employeeRepository;
-
-    public EmployeesController(IEmployeeRepository employeeRepository)
-    {
-        _employeeRepository = employeeRepository;
-    }
+    [HttpPost]
+    public async Task<IActionResult> CreateEmployee(EmployeeForCreateDto employee)
+        => Ok(await mediator.Send(new CreateEmployeeCommand { Employee = employee }));
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
-    {
-        return Ok(await _employeeRepository.GetEmployeesAsync());
-    }
-
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateEmployee(int id, [FromBody] Employee employeeForUpdate)
-    {
-        var employee = await _employeeRepository.GetEmployeeByIdAsync(id);
-        if (employee is not null)
-        {
-            employee.FirstName = employeeForUpdate.FirstName;
-            employee.LastName = employeeForUpdate.LastName;
-            employee.Salary = employeeForUpdate.Salary;
-            employee.HireDate = employeeForUpdate.HireDate;
-            employee.DateOfBirth = employeeForUpdate.DateOfBirth;
-            employee.DateOfBirth = employeeForUpdate.DateOfBirth;
-            employee.JobTitle = employeeForUpdate.JobTitle;
-            employee.Phone = employeeForUpdate.Phone;
-            employee.Gender = employeeForUpdate.Gender;
-
-            await _employeeRepository.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        return NotFound();
-
-    }
+        => Ok(await mediator.Send(new GetAllEmployeesQuery()));
 
 }

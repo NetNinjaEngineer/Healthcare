@@ -12,6 +12,11 @@ public sealed class EmployeeRepository : IEmployeeRepository
         _context = context;
     }
 
+    public void CreateEmployee(Employee employee)
+    {
+        _context.Employees.Add(employee);
+    }
+
     public async Task<Employee?> GetEmployeeByIdAsync(int id)
     {
         return await _context.Employees.FindAsync(id);

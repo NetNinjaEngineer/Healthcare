@@ -7,11 +7,11 @@ public class Employee : BaseEntity
 
     public string? JobTitle { get; set; }
 
-    public DateOnly HireDate { get; set; }
+    public DateTime HireDate { get; set; }
 
     public decimal Salary { get; set; }
 
-    public DateOnly DateOfBirth { get; set; }
+    public DateTime DateOfBirth { get; set; }
 
     public Gender Gender { get; set; }
 
