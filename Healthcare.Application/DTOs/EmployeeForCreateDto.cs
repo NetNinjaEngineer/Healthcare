@@ -13,8 +13,8 @@ public sealed record EmployeeForCreateDto : EmployeeForManipulateDto
         DateTime DateOfBirth,
         decimal Salary,
         Gender Gender,
-        string email)
-        : base(FirstName, LastName, JobTitle, Phone, HireDate, DateOfBirth, Salary, Gender, email)
+        string Email)
+        : base(FirstName, LastName, JobTitle, Phone, HireDate, DateOfBirth, Salary, Gender, Email)
     {
     }
 }

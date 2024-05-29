@@ -11,8 +11,9 @@ public sealed record EmployeeForUpdateDto : EmployeeForManipulateDto
         DateTime HireDate,
         DateTime DateOfBirth,
         decimal Salary,
-        Gender Gender)
-        : base(FirstName, LastName, JobTitle, Phone, HireDate, DateOfBirth, Salary, Gender)
+        Gender Gender,
+        string Email)
+        : base(FirstName, LastName, JobTitle, Phone, HireDate, DateOfBirth, Salary, Gender, Email)
     {
     }
 }

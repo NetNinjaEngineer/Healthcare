@@ -19,6 +19,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<GlobalExceptionHandingMiddleware>();
+
 app.UseMiddleware<LoggingMiddleware>();
 
 app.UseCors(c => c.AllowAnyHeader()
