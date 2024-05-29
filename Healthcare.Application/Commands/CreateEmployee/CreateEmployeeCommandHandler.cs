@@ -20,7 +20,7 @@ public sealed class CreateEmployeeCommandHandler(
 
         var employee = mapper.Map<Employee>(request.Employee);
 
-        employeeRepository.CreateEmployee(employee);
+        employeeRepository.Create(employee);
 
         await employeeRepository.SaveChangesAsync();
 
