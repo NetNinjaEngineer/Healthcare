@@ -1,11 +1,12 @@
 ﻿using Healthcare.Application.Interfaces;
+using Healthcare.Domain;
 using Healthcare.Domain.Entities;
 using Healthcare.Domain.Exceptions;
 using MediatR;
 
 namespace Healthcare.Application.Queries.GetEmployeeDetails;
 public sealed class GetEmployeeDetailsQueryHandler(
-    IEmployeeRepository employeeRepository
+    IUnitOfWork unitOfWork
     ) : IRequestHandler<GetEmployeeDetailsQuery, Employee>
 {
     public async Task<Employee> Handle(
@@ -14,9 +15,9 @@ public sealed class GetEmployeeDetailsQueryHandler(
     {
         if (request.EmployeeId is not null)
         {
-            var employee = await employeeRepository.GetEmployeeByIdAsync(request.EmployeeId.Value);
+            var employee = await unitOfWork.EmployeeRepository.GetByIdAsync(request.EmployeeId.Value);
             return employee is null
-                ? throw new EmployeeNotFoundException($"Employee with ID: {request.EmployeeId} was not found !!!")
+                ? throw new EmployeeNotFoundException(ErrorMessages.EmployeeNotFound)
                 : employee;
         }
 

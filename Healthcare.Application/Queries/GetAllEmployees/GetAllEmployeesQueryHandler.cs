@@ -4,13 +4,13 @@ using MediatR;
 
 namespace Healthcare.Application.Queries.GetAllEmployees;
 public sealed class GetAllEmployeesQueryHandler(
-    IEmployeeRepository employeeRepository
+    IUnitOfWork unitOfWork
     ) : IRequestHandler<GetAllEmployeesQuery, IEnumerable<Employee>>
 {
     public async Task<IEnumerable<Employee>> Handle(
         GetAllEmployeesQuery request,
         CancellationToken cancellationToken)
     {
-        return await employeeRepository.GetEmployeesAsync();
+        return await unitOfWork.EmployeeRepository.GetAllAsync();
     }
 }

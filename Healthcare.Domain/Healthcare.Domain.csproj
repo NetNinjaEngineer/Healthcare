@@ -9,10 +9,10 @@
   <ItemGroup>
     <Folder Include="Aggregates\" />
     <Folder Include="Specifications\" />
-    <Folder Include="ValueObjects\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
   </ItemGroup>
 

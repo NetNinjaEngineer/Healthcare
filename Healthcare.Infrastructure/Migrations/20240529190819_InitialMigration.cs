@@ -11,20 +11,24 @@ namespace Healthcare.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "dbo");
+
             migrationBuilder.CreateTable(
                 name: "Employees",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    JobTitle = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
-                    HireDate = table.Column<DateTime>(type: "DATE", nullable: false),
-                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "DATE", nullable: false),
+                    FirstName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
+                    HireDate = table.Column<DateTime>(type: "DATE", nullable: false),
+                    JobTitle = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Phone = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
+                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,7 +40,8 @@ namespace Healthcare.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Employees",
+                schema: "dbo");
         }
     }
 }

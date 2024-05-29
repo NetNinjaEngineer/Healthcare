@@ -31,8 +31,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.WebUI.Integratio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.Application", "Healthcare.Application\Healthcare.Application.csproj", "{3DF4C157-B9B2-4DFF-AF06-9D324AC19BF7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.Blazor", "Healthcare.Blazor\Healthcare.Blazor.csproj", "{E8B2DAFE-9C0C-4C96-8DBF-7CD8F0E0923C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,10 +77,6 @@ Global
 		{3DF4C157-B9B2-4DFF-AF06-9D324AC19BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DF4C157-B9B2-4DFF-AF06-9D324AC19BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DF4C157-B9B2-4DFF-AF06-9D324AC19BF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E8B2DAFE-9C0C-4C96-8DBF-7CD8F0E0923C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8B2DAFE-9C0C-4C96-8DBF-7CD8F0E0923C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8B2DAFE-9C0C-4C96-8DBF-7CD8F0E0923C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8B2DAFE-9C0C-4C96-8DBF-7CD8F0E0923C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,7 +94,6 @@ Global
 		{E9E74456-2082-4C1C-8EEF-033EB57F0CF8} = {2676514E-0E6F-44A7-A3A3-85B99CDF8245}
 		{B934E7ED-78E6-408C-A368-05824A5394E0} = {2676514E-0E6F-44A7-A3A3-85B99CDF8245}
 		{3DF4C157-B9B2-4DFF-AF06-9D324AC19BF7} = {9581F254-B239-493D-838C-3D0DE7F491E3}
-		{E8B2DAFE-9C0C-4C96-8DBF-7CD8F0E0923C} = {9581F254-B239-493D-838C-3D0DE7F491E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FEE739B2-CB95-41F5-ABC9-CC9611DA3A3F}

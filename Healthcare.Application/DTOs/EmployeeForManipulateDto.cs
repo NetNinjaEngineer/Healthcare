@@ -1,4 +1,4 @@
-﻿using Healthcare.Domain.Entities;
+﻿using Healthcare.Domain.ValueObjects;
 
 namespace Healthcare.Application.DTOs;
 public abstract record EmployeeForManipulateDto(

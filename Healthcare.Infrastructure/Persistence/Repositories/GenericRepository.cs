@@ -3,7 +3,7 @@ using Healthcare.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Healthcare.Infrastructure.Persistence.Repositories;
-public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
+public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
 {
     private readonly ApplicationDbContext _context;
 

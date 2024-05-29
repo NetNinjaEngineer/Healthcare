@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Healthcare.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240529072744_InitialMigration")]
+    [Migration("20240529190819_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -33,42 +33,50 @@ namespace Healthcare.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("DATE");
+                    b.Property<DateTime>("_dateOfBirth")
+                        .HasColumnType("DATE")
+                        .HasColumnName("DateOfBirth");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("_firstName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar")
+                        .HasColumnName("FirstName");
 
-                    b.Property<string>("Gender")
+                    b.Property<string>("_gender")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Gender");
 
-                    b.Property<DateTime>("HireDate")
-                        .HasColumnType("DATE");
+                    b.Property<DateTime>("_hireDate")
+                        .HasColumnType("DATE")
+                        .HasColumnName("HireDate");
 
-                    b.Property<string>("JobTitle")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar");
-
-                    b.Property<string>("LastName")
+                    b.Property<string>("_jobTitle")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar")
+                        .HasColumnName("JobTitle");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("_lastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
+                        .HasColumnName("LastName");
+
+                    b.Property<string>("_phone")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar")
+                        .HasColumnName("Phone");
 
-                    b.Property<decimal>("Salary")
-                        .HasColumnType("decimal(18, 2)");
+                    b.Property<decimal>("_salary")
+                        .HasColumnType("decimal(18, 2)")
+                        .HasColumnName("Salary");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", "dbo");
                 });
 #pragma warning restore 612, 618
         }

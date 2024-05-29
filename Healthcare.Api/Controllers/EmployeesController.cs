@@ -1,4 +1,5 @@
 ﻿using Healthcare.Application.Commands.CreateEmployee;
+using Healthcare.Application.Commands.DeleteEmployee;
 using Healthcare.Application.Commands.UpdateEmployee;
 using Healthcare.Application.DTOs;
 using Healthcare.Application.Queries.GetAllEmployees;
@@ -29,6 +30,13 @@ public class EmployeesController(IMediator mediator) : ControllerBase
         EmployeeForUpdateDto updatedEmployee)
     {
         await mediator.Send(new UpdateEmployeeCommand { EmployeeId = id, UpdatedEmployee = updatedEmployee });
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await mediator.Send(new DeleteEmployeeCommand { Id = id });
         return NoContent();
     }
 

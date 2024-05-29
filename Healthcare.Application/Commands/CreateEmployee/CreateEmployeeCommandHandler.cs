@@ -2,7 +2,6 @@
 using FluentValidation;
 using Healthcare.Application.Interfaces;
 using Healthcare.Domain.Entities;
-using Healthcare.Domain.Events.Employee;
 using MediatR;
 
 namespace Healthcare.Application.Commands.CreateEmployee;
@@ -23,8 +22,6 @@ public sealed class CreateEmployeeCommandHandler(
         unitOfWork.EmployeeRepository.Create(employee);
 
         await unitOfWork.CommitAsync();
-
-        new EmployeeCreatedDomainEventHandler().Handle(new EmployeeCreatedEvent(employee.Id));
 
         return employee.Id;
     }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Healthcare.Application.Interfaces;
+using Healthcare.Domain;
 using Healthcare.Domain.Exceptions;
 using MediatR;
 
@@ -14,7 +15,7 @@ public sealed class UpdateEmployeeCommandHandler(
     {
         var employee = await unitOfWork.EmployeeRepository
             .GetByIdAsync(request.EmployeeId)
-            ?? throw new EmployeeNotFoundException($"employee with id: {request.EmployeeId} was not found.");
+            ?? throw new EmployeeNotFoundException(ErrorMessages.EmployeeNotFound);
 
         mapper.Map(request.UpdatedEmployee, employee);
 
