@@ -5,20 +5,13 @@ using Newtonsoft.Json;
 using System.Net;
 
 namespace Healthcare.Application.Middleware;
-public class GlobalExceptionHandingMiddleware
+public class GlobalExceptionHandingMiddleware(RequestDelegate next)
 {
-    private readonly RequestDelegate _next;
-
-    public GlobalExceptionHandingMiddleware(RequestDelegate next)
-    {
-        _next = next;
-    }
-
     public async Task InvokeAsync(HttpContext context)
     {
         try
         {
-            await _next(context);
+            await next(context);
         }
         catch (Exception ex)
         {
@@ -34,8 +27,7 @@ public class GlobalExceptionHandingMiddleware
 
         switch (exception)
         {
-            case ValidationException:
-                var validationException = exception as ValidationException;
+            case ValidationException validationException:
                 var validationErrors = validationException!.Errors.Select(e => e.ErrorMessage)
                     .ToArray();
                 statusCode = HttpStatusCode.UnprocessableEntity;
@@ -43,7 +35,7 @@ public class GlobalExceptionHandingMiddleware
                     (int)statusCode, [.. validationErrors]);
                 break;
 
-            case EmployeeNotFoundException:
+            case NotFoundException:
                 statusCode = HttpStatusCode.NotFound;
                 jsonErrorResponse = new JsonErrorResponse(exception.Message, (int)statusCode, null);
                 break;
@@ -63,17 +55,10 @@ public class GlobalExceptionHandingMiddleware
         await context.Response.WriteAsync(serializedResponse);
     }
 
-    internal class JsonErrorResponse
+    internal class JsonErrorResponse(string? errorMessage, int statusCode, List<string>? validationErrors)
     {
-        public JsonErrorResponse(string? errorMessage, int statusCode, List<string>? validationErrors)
-        {
-            ErrorMessage = errorMessage;
-            StatusCode = statusCode;
-            ValidationErrors = validationErrors;
-        }
-
-        public string? ErrorMessage { get; private set; }
-        public int StatusCode { get; private set; }
-        public List<string>? ValidationErrors { get; private set; }
+        public string? ErrorMessage { get; private set; } = errorMessage;
+        public int StatusCode { get; private set; } = statusCode;
+        public List<string>? ValidationErrors { get; private set; } = validationErrors;
     }
 }

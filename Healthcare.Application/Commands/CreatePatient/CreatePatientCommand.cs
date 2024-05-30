@@ -1,4 +1,9 @@
-﻿namespace Healthcare.Application.Commands.CreatePatient;
-internal class CreatePatientCommand
+﻿using Healthcare.Application.DTOs;
+using Healthcare.Domain.Entities;
+using MediatR;
+
+namespace Healthcare.Application.Commands.CreatePatient;
+public sealed class CreatePatientCommand : IRequest<Patient>
 {
+    public PatientForCreateDto PatientForCreateDto { get; set; } = default!;
 }

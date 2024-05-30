@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using Healthcare.Application.Commands.Employee.CreateEmployee;
 using Healthcare.Application.Interfaces;
 using Healthcare.Domain.Entities;
 using MediatR;

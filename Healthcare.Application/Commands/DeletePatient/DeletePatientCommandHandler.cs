@@ -1,15 +1,22 @@
 ﻿using Healthcare.Application.Commands.DeleteEmployee;
 using Healthcare.Application.Interfaces;
-using Healthcare.Domain.Entities;
+using Healthcare.Domain.Exceptions;
 using MediatR;
 
 namespace Healthcare.Application.Commands.DeletePatient;
-public sealed class DeletePatientCommandHandler : IRequestHandler<DeleteEmployeeCommand, Unit>
+public sealed class DeletePatientCommandHandler(IUnitOfWork unitOfWork)
+    : IRequestHandler<DeleteEmployeeCommand, Unit>
 {
-    private readonly IUnitOfWork _unitOfWork;
-    public DeletePatientCommandHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
     public async Task<Unit> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
     {
-        var patients = _unitOfWork.Repository<Patient>().GetAllAsync();
+        if (request.Id != null)
+        {
+            var patient = await unitOfWork.PatientRepository.GetByIdAsync(request.Id)
+                          ?? throw new PatientNotFoundException($"Patient with id: {request.Id} was not found.");
+            unitOfWork.PatientRepository.Delete(patient);
+        }
+
+        await unitOfWork.CommitAsync();
+        return Unit.Value;
     }
 }

@@ -3,21 +3,18 @@ using Healthcare.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Healthcare.Infrastructure.Persistence.Repositories;
-public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
+public class GenericRepository<TEntity>(ApplicationDbContext context) : IGenericRepository<TEntity>
+    where TEntity : BaseEntity
 {
-    private readonly ApplicationDbContext _context;
+    public void Create(TEntity entity) => context.Set<TEntity>().Add(entity);
 
-    public GenericRepository(ApplicationDbContext context) => _context = context;
-
-    public void Create(TEntity entity) => _context.Set<TEntity>().Add(entity);
-
-    public void Delete(TEntity entity) => _context.Remove(entity);
+    public void Delete(TEntity entity) => context.Remove(entity);
 
     public async Task<IEnumerable<TEntity>> GetAllAsync()
-        => await _context.Set<TEntity>().ToListAsync();
+        => await context.Set<TEntity>().ToListAsync();
 
     public async Task<TEntity> GetByIdAsync(string id)
-        => await _context.Set<TEntity>().FindAsync(id) ?? default!;
+        => await context.Set<TEntity>().FindAsync(id) ?? default!;
 
-    public void Update(TEntity entity) => _context.Update(entity);
+    public void Update(TEntity entity) => context.Update(entity);
 }
