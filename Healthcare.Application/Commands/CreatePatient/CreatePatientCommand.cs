@@ -1,4 +1,4 @@
-﻿using Healthcare.Application.DTOs;
+﻿using Healthcare.Application.DTOs.Patient;
 using Healthcare.Domain.Entities;
 using MediatR;
 

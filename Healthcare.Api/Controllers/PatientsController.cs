@@ -1,6 +1,6 @@
 ﻿using Healthcare.Application.Commands.CreatePatient;
 using Healthcare.Application.Commands.DeletePatient;
-using Healthcare.Application.DTOs;
+using Healthcare.Application.DTOs.Patient;
 using Healthcare.Application.Queries.GetPatientDetails;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

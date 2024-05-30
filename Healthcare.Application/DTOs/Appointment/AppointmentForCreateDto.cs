@@ -1,4 +1,4 @@
-﻿namespace Healthcare.Application.DTOs;
+﻿namespace Healthcare.Application.DTOs.Appointment;
 public sealed class AppointmentForCreateDto
 {
     public string EmployeeId { get; set; } = string.Empty;

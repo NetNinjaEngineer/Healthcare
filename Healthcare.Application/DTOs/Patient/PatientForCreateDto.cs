@@ -1,6 +1,6 @@
 ﻿using Healthcare.Domain.ValueObjects;
 
-namespace Healthcare.Application.DTOs;
+namespace Healthcare.Application.DTOs.Patient;
 
 public record PatientForCreateDto(
     string FirstName,

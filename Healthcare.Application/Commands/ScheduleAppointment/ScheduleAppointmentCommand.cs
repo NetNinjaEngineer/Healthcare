@@ -1,4 +1,4 @@
-﻿using Healthcare.Application.DTOs;
+﻿using Healthcare.Application.DTOs.Appointment;
 using Healthcare.Application.Responses;
 using MediatR;
 

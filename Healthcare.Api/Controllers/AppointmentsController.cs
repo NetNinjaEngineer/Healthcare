@@ -1,5 +1,5 @@
 ﻿using Healthcare.Application.Commands.ScheduleAppointment;
-using Healthcare.Application.DTOs;
+using Healthcare.Application.DTOs.Appointment;
 using Healthcare.Application.Queries.GetAllAppointmentsForPatient;
 using Healthcare.Application.Queries.GetPatientAppointmentSchedule;
 using Healthcare.Application.Responses;

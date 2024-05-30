@@ -2,7 +2,7 @@
 using Healthcare.Application.Commands.DeleteEmployee;
 using Healthcare.Application.Commands.PromoteEmployee;
 using Healthcare.Application.Commands.UpdateEmployee;
-using Healthcare.Application.DTOs;
+using Healthcare.Application.DTOs.Employee;
 using Healthcare.Application.Queries.GetAllEmployees;
 using Healthcare.Application.Queries.GetEmployeeDetails;
 using Healthcare.Domain.Entities;

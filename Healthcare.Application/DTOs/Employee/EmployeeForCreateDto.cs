@@ -1,4 +1,4 @@
-﻿namespace Healthcare.Application.DTOs;
+﻿namespace Healthcare.Application.DTOs.Employee;
 
 public sealed class EmployeeForCreateDto : EmployeeForManipulateDto
 {

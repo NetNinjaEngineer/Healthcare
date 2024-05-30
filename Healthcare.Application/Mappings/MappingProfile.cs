@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
-using Healthcare.Application.DTOs;
+using Healthcare.Application.DTOs.Appointment;
+using Healthcare.Application.DTOs.Department;
+using Healthcare.Application.DTOs.Employee;
+using Healthcare.Application.DTOs.Patient;
 using Healthcare.Domain.Entities;
 
 namespace Healthcare.Application.Mappings;
@@ -13,5 +16,9 @@ public class MappingProfile : Profile
             .ForMember(e => e.Gender, options => options.MapFrom(e => e.Gender.ToString()));
         CreateMap<PatientForCreateDto, Patient>();
         CreateMap<AppointmentForCreateDto, Appointment>();
+        CreateMap<Patient, PatientDto>();
+        CreateMap<Appointment, AppointmentDto>();
+        CreateMap<Employee, EmployeeDto>();
+        CreateMap<Department, DepartmentDto>();
     }
 }

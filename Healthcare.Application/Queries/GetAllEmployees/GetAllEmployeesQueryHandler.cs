@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Healthcare.Application.DTOs;
+using Healthcare.Application.DTOs.Employee;
 using Healthcare.Application.Interfaces;
 using MediatR;
 

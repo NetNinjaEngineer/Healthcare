@@ -1,4 +1,4 @@
-﻿using Healthcare.Application.DTOs;
+﻿using Healthcare.Application.DTOs.Employee;
 using MediatR;
 
 namespace Healthcare.Application.Commands.UpdateEmployee;

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Healthcare.Application.DTOs.Appointment;
+using MediatR;
 
 namespace Healthcare.Application.Commands.CancelAppointment;
-internal class CancelAppointmentCommand
+public sealed class CancelAppointmentCommand : IRequest<AppointmentDto>
 {
+    public string AppointmentId { get; set; } = string.Empty;
 }

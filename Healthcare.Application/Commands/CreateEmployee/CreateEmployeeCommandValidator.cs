@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Healthcare.Application.DTOs;
+using Healthcare.Application.DTOs.Employee;
 
 namespace Healthcare.Application.Commands.CreateEmployee;
 public sealed class CreateEmployeeCommandValidator : AbstractValidator<EmployeeForManipulateDto>

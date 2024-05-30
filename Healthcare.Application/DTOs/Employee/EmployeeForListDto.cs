@@ -1,7 +1,7 @@
-﻿using Healthcare.Domain.ValueObjects;
+﻿using Healthcare.Application.DTOs.Common;
 
-namespace Healthcare.Application.DTOs;
-public abstract class EmployeeForManipulateDto
+namespace Healthcare.Application.DTOs.Employee;
+public sealed class EmployeeForListDto : BaseEntityDto
 {
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
@@ -10,6 +10,6 @@ public abstract class EmployeeForManipulateDto
     public DateTime? HireDate { get; set; }
     public DateTime? DateOfBirth { get; set; }
     public decimal Salary { get; set; }
-    public Gender Gender { get; set; }
+    public string? Gender { get; set; }
     public string? Email { get; set; }
 }
