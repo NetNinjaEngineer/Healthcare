@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Healthcare.Application.DTOs.Employee;
 using Healthcare.Application.Interfaces;
 using Healthcare.Domain.Entities;
 using MediatR;
@@ -8,9 +9,9 @@ namespace Healthcare.Application.Commands.CreateEmployee;
 public sealed class CreateEmployeeCommandHandler(
     IUnitOfWork unitOfWork,
     IMapper mapper
-    ) : IRequestHandler<CreateEmployeeCommand, string>
+    ) : IRequestHandler<CreateEmployeeCommand, EmployeeForListDto>
 {
-    public async Task<string> Handle(
+    public async Task<EmployeeForListDto> Handle(
         CreateEmployeeCommand request,
         CancellationToken cancellationToken)
     {
@@ -23,6 +24,6 @@ public sealed class CreateEmployeeCommandHandler(
 
         await unitOfWork.CommitAsync();
 
-        return employee.Id;
+        return mapper.Map<EmployeeForListDto>(employee);
     }
 }

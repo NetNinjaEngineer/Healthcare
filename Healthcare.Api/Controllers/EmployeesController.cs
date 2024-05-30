@@ -15,20 +15,26 @@ namespace Healthcare.Api.Controllers;
 public class EmployeesController(IMediator mediator) : ControllerBase
 {
     [HttpPost]
+    [ProducesResponseType(typeof(EmployeeForListDto), StatusCodes.Status201Created)]
     public async Task<IActionResult> CreateEmployee(EmployeeForCreateDto employee)
-        => Ok(await mediator.Send(new CreateEmployeeCommand { Employee = employee }));
+    {
+        var employeeCreated = await mediator.Send(new CreateEmployeeCommand { Employee = employee });
+        return CreatedAtRoute("GetEmployee", new { id = employeeCreated.Id }, employeeCreated);
+    }
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<EmployeeForListDto>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<EmployeeForListDto>>> GetEmployees()
         => Ok(await mediator.Send(new GetAllEmployeesQuery()));
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}", Name = "GetEmployee")]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(EmployeeForListDto), StatusCodes.Status200OK)]
     public async Task<ActionResult<EmployeeForListDto>> GetEmployee(string id)
         => Ok(await mediator.Send(new GetEmployeeDetailsQuery(id)));
 
     [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<ActionResult<IEnumerable<Employee>>> UpdateEmployee(string id,
         EmployeeForUpdateDto updatedEmployee)
@@ -38,6 +44,7 @@ public class EmployeesController(IMediator mediator) : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> Delete(string id)
     {
@@ -47,6 +54,7 @@ public class EmployeesController(IMediator mediator) : ControllerBase
 
     [Route("promote/{id}")]
     [HttpPut]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> PromoteEmployee(string id, [FromBody] PromoteEmployeeDto body)
     {

@@ -35,11 +35,11 @@ public class PatientEntityTypeConfiguration : IEntityTypeConfiguration<Patient>
             .IsRequired();
 
         patientConfiguration
-        .Property(e => e.Gender)
-        .HasConversion(
-            g => g.ToString(),
-            g => (Gender)Enum.Parse(typeof(Gender), g)
-        );
+            .Property(e => e.Gender)
+            .HasConversion(
+                g => g.ToString(),
+                g => (Gender)Enum.Parse(typeof(Gender), g)
+            );
 
     }
 }

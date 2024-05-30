@@ -10,18 +10,25 @@ namespace Healthcare.Api.Controllers;
 [ApiController]
 public class PatientsController(IMediator mediator) : ControllerBase
 {
-    [HttpGet("{id}", Name = "GetPatient")]
-    public async Task<IActionResult> GetPatient(string id)
-        => Ok(await mediator.Send(new GetPatientDetailsQuery(id)));
-
     [HttpPost]
-    public async Task<IActionResult> CreatePatient([FromBody] PatientForCreateDto request)
+    [ProducesResponseType(typeof(PatientForListDto), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<PatientForListDto>> CreatePatient([FromBody] PatientForCreateDto request)
     {
         var patientReturned = await mediator.Send(new CreatePatientCommand() { PatientForCreateDto = request });
         return CreatedAtRoute("GetPatient", new { id = patientReturned.Id }, patientReturned);
     }
 
+    [HttpGet("{id}", Name = "GetPatient")]
+    [ProducesResponseType(typeof(PatientForListDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<PatientForListDto>> GetPatient(string id)
+        => Ok(await mediator.Send(new GetPatientDetailsQuery(id)));
+
+
     [HttpDelete("{id}")]
+    [ProducesResponseType(typeof(PatientForListDto), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeletePatient(string id)
     {
         await mediator.Send(new DeletePatientCommand { PatientId = id });

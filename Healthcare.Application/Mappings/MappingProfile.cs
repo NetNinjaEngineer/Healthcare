@@ -20,5 +20,6 @@ public class MappingProfile : Profile
         CreateMap<Appointment, AppointmentDto>();
         CreateMap<Employee, EmployeeDto>();
         CreateMap<Department, DepartmentDto>();
+        CreateMap<Patient, PatientForListDto>();
     }
 }

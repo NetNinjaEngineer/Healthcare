@@ -1,4 +1,5 @@
 ﻿using Healthcare.Application.Interfaces;
+using Healthcare.Domain.Interceptors;
 using Healthcare.Infrastructure.Persistence;
 using Healthcare.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,8 @@ public static class InfrastructureServicesRegistration
         IConfiguration configuration)
     {
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+            .AddInterceptors(new SoftDeletableInterceptor()));
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
