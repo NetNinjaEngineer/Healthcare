@@ -55,8 +55,7 @@ namespace Healthcare.Infrastructure.Migrations
                 schema: "dbo",
                 table: "Employees",
                 type: "nvarchar(450)",
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
 
             migrationBuilder.CreateTable(
                 name: "Departments",

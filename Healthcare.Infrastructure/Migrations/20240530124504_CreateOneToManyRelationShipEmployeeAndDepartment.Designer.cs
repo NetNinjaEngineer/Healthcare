@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Healthcare.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240530124125_CreateOneToManyRelationShipEmployeeAndDepartment")]
+    [Migration("20240530124504_CreateOneToManyRelationShipEmployeeAndDepartment")]
     partial class CreateOneToManyRelationShipEmployeeAndDepartment
     {
         /// <inheritdoc />
@@ -80,7 +80,6 @@ namespace Healthcare.Infrastructure.Migrations
                         .HasColumnType("DATE");
 
                     b.Property<string>("DepartmentId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
@@ -175,8 +174,7 @@ namespace Healthcare.Infrastructure.Migrations
                     b.HasOne("Healthcare.Domain.Entities.Department", "Department")
                         .WithMany("Employees")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Department");
                 });

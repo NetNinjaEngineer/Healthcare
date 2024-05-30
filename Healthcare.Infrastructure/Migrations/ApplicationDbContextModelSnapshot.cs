@@ -77,7 +77,6 @@ namespace Healthcare.Infrastructure.Migrations
                         .HasColumnType("DATE");
 
                     b.Property<string>("DepartmentId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
@@ -172,8 +171,7 @@ namespace Healthcare.Infrastructure.Migrations
                     b.HasOne("Healthcare.Domain.Entities.Department", "Department")
                         .WithMany("Employees")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Department");
                 });
