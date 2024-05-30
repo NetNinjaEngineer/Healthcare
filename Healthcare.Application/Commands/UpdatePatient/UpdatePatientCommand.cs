@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Healthcare.Application.DTOs.Patient;
+using MediatR;
 
 namespace Healthcare.Application.Commands.UpdatePatient;
-internal class UpdatePatientCommand
+public sealed class UpdatePatientCommand : IRequest<Unit>
 {
+    public required string PatientId { get; set; }
+    public required PatientForUpdateDto PatientForUpdate { get; set; }
 }

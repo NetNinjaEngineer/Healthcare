@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Healthcare.Application.DTOs.Patient;
+using MediatR;
 
 namespace Healthcare.Application.Queries.GetAllPatients;
-internal class GetAllPatientsQuery
+public sealed class GetAllPatientsQuery : IRequest<IEnumerable<PatientForListDto>>
 {
 }

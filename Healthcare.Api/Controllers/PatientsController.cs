@@ -1,6 +1,8 @@
 ﻿using Healthcare.Application.Commands.CreatePatient;
 using Healthcare.Application.Commands.DeletePatient;
+using Healthcare.Application.Commands.UpdatePatient;
 using Healthcare.Application.DTOs.Patient;
+using Healthcare.Application.Queries.GetAllPatients;
 using Healthcare.Application.Queries.GetPatientDetails;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +12,11 @@ namespace Healthcare.Api.Controllers;
 [ApiController]
 public class PatientsController(IMediator mediator) : ControllerBase
 {
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<PatientForListDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<PatientForListDto>>> GetPatients()
+        => Ok(await mediator.Send(new GetAllPatientsQuery()));
+
     [HttpPost]
     [ProducesResponseType(typeof(PatientForListDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -24,6 +31,15 @@ public class PatientsController(IMediator mediator) : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<PatientForListDto>> GetPatient(string id)
         => Ok(await mediator.Send(new GetPatientDetailsQuery(id)));
+
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<PatientForListDto>> UpdatePatient(string id, [FromBody] PatientForUpdateDto updatedPatient)
+    {
+        await mediator.Send(new UpdatePatientCommand { PatientId = id, PatientForUpdate = updatedPatient });
+        return NoContent();
+    }
 
 
     [HttpDelete("{id}")]
