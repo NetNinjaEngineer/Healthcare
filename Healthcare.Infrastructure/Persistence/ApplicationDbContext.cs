@@ -1,4 +1,5 @@
 ﻿using Healthcare.Domain.Entities;
+using Healthcare.Domain.Interceptors;
 using Healthcare.Infrastructure.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,13 +13,18 @@ public sealed class ApplicationDbContext : DbContext
     public DbSet<Patient> Patients { get; set; }
     public DbSet<Department> Departments { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        base.OnConfiguring(optionsBuilder);
+        optionsBuilder.AddInterceptors(new SoftDeletableInterceptor());
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
 
-        //TODO: Complete configuration
         modelBuilder.ApplyConfiguration(new PatientEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new AppointmentEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new DepartmentEntityTypeConfiguration());

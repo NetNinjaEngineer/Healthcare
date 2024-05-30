@@ -1,5 +1,6 @@
 ﻿using Healthcare.Application.Commands.ScheduleAppointment;
 using Healthcare.Application.DTOs;
+using Healthcare.Application.Queries.GetAllAppointmentsForPatient;
 using Healthcare.Application.Queries.GetPatientAppointmentSchedule;
 using Healthcare.Application.Responses;
 using MediatR;
@@ -37,4 +38,20 @@ public class AppointmentsController(IMediator mediator) : ControllerBase
             AppointmentId = appointmentId,
             PatientId = patientId
         }));
+
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<ScheduleAppointmentResponse>>> GetAppointmentsForPatient(
+       [FromRoute] string patientId)
+       => Ok(await mediator.Send(new GetAllAppointmentsForPatientQuery
+       {
+           PatientId = patientId
+       }));
+
+    //[Route("cancel")]
+    //[HttpPost]
+    //public async Task<IActionResult> CancelAppointment([FromRoute] string patientId)
+    //{
+    //    await mediator.Send();
+    //}
 }

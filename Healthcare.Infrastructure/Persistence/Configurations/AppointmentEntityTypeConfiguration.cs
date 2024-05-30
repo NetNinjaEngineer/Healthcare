@@ -33,6 +33,8 @@ internal class AppointmentEntityTypeConfiguration : IEntityTypeConfiguration<App
             .HasForeignKey(x => x.PatientId)
             .IsRequired();
 
+        appointmentConfiguration.HasQueryFilter(x => x.IsDeleted == false);
+
         appointmentConfiguration.ToTable("Appointments");
 
     }
