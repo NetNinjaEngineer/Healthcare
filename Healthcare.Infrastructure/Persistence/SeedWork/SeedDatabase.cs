@@ -1,7 +1,7 @@
 ﻿using Healthcare.Domain.Entities;
 using Newtonsoft.Json;
 
-namespace Healthcare.Infrastructure.Persistence.DataSeed;
+namespace Healthcare.Infrastructure.Persistence.SeedWork;
 public static class SeedDatabase
 {
     public static async Task Seed(ApplicationDbContext context)

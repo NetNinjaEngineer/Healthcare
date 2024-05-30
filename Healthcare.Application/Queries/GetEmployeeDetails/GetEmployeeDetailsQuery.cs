@@ -1,8 +1,8 @@
-﻿using Healthcare.Domain.Entities;
+﻿using Healthcare.Application.DTOs;
 using MediatR;
 
 namespace Healthcare.Application.Queries.GetEmployeeDetails;
-public sealed class GetEmployeeDetailsQuery : IRequest<Employee>
+public sealed class GetEmployeeDetailsQuery : IRequest<EmployeeForListDto>
 {
     public string? EmployeeId { get; private set; }
 

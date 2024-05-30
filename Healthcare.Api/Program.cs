@@ -2,11 +2,17 @@ using Healthcare.Application;
 using Healthcare.Application.Middleware;
 using Healthcare.Infrastructure;
 using Healthcare.Infrastructure.Persistence;
-using Healthcare.Infrastructure.Persistence.DataSeed;
+using Healthcare.Infrastructure.Persistence.SeedWork;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(options =>
 {
+    options.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
+    options.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
+    options.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
+    options.OutputFormatters.RemoveType<StringOutputFormatter>();
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -26,7 +32,7 @@ if (app.Environment.IsDevelopment())
 using (var scope = app.Services.CreateScope())
 {
     var databaseContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    SeedDatabase.Seed(databaseContext);
+    await SeedDatabase.Seed(databaseContext);
 }
 
 app.UseMiddleware<GlobalExceptionHandingMiddleware>();

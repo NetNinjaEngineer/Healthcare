@@ -9,5 +9,7 @@ public class MappingProfile : Profile
     {
         CreateMap<EmployeeForCreateDto, Employee>();
         CreateMap<EmployeeForUpdateDto, Employee>();
+        CreateMap<Employee, EmployeeForListDto>()
+            .ForMember(e => e.Gender, options => options.MapFrom(e => e.Gender.ToString()));
     }
 }

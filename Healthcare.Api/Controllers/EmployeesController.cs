@@ -19,14 +19,17 @@ public class EmployeesController(IMediator mediator) : ControllerBase
         => Ok(await mediator.Send(new CreateEmployeeCommand { Employee = employee }));
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+    [ProducesResponseType(typeof(IEnumerable<EmployeeForListDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<EmployeeForListDto>>> GetEmployees()
         => Ok(await mediator.Send(new GetAllEmployeesQuery()));
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee(string id)
+    [ProducesResponseType(typeof(EmployeeForListDto), StatusCodes.Status200OK)]
+    public async Task<ActionResult<EmployeeForListDto>> GetEmployee(string id)
         => Ok(await mediator.Send(new GetEmployeeDetailsQuery(id)));
 
     [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<ActionResult<IEnumerable<Employee>>> UpdateEmployee(string id,
         EmployeeForUpdateDto updatedEmployee)
     {
@@ -35,6 +38,7 @@ public class EmployeesController(IMediator mediator) : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> Delete(string id)
     {
         await mediator.Send(new DeleteEmployeeCommand { Id = id });
@@ -43,6 +47,7 @@ public class EmployeesController(IMediator mediator) : ControllerBase
 
     [Route("promote/{id}")]
     [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> PromoteEmployee(string id, [FromBody] PromoteEmployeeDto body)
     {
         await mediator.Send(new PromoteEmployeeCommand() { EmployeeId = id, PromoteEmployeeModel = body });

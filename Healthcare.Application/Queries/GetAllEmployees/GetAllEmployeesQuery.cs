@@ -1,7 +1,7 @@
-﻿using Healthcare.Domain.Entities;
+﻿using Healthcare.Application.DTOs;
 using MediatR;
 
 namespace Healthcare.Application.Queries.GetAllEmployees;
-public sealed class GetAllEmployeesQuery : IRequest<IEnumerable<Employee>>
+public sealed class GetAllEmployeesQuery : IRequest<IEnumerable<EmployeeForListDto>>
 {
 }
