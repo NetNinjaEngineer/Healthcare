@@ -21,13 +21,13 @@ public sealed class CancelAppointmentCommandHandler
         CancelAppointmentCommand request,
         CancellationToken cancellationToken)
     {
-        if (_unitOfWork.AppointmentRepository.CheckExists(request.AppointmentId))
-        {
-            var appointment = await _unitOfWork.AppointmentRepository.GetByIdAsync(request.AppointmentId);
-            _unitOfWork.AppointmentRepository.Delete(appointment);
-            return _mapper.Map<AppointmentDto>(appointment);
-        }
-
-        throw new AppointmentNotFoundException($"Appointment with id: {request.AppointmentId} was not founded.");
+        var appointment = _unitOfWork.AppointmentRepository
+               .GetAllAsync()
+               .Result
+               .SingleOrDefault(e => e.PatientId == request.PatientId && e.Id == request.AppointmentId)
+               ?? throw new AppointmentNotFoundException($"Appointment with id: {request.AppointmentId} was not founded.");
+        _unitOfWork.AppointmentRepository.Delete(appointment);
+        await _unitOfWork.CommitAsync();
+        return _mapper.Map<AppointmentDto>(appointment);
     }
 }
