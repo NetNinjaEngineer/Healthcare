@@ -8,12 +8,18 @@ public sealed class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
     public DbSet<Employee> Employees { get; set; }
+    public DbSet<Appointment> Appointments { get; set; }
+    public DbSet<Patient> Patients { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
+
+        //TODO: Complete configuration
+        modelBuilder.ApplyConfiguration(new PatientEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new AppointmentEntityTypeConfiguration());
 
     }
 

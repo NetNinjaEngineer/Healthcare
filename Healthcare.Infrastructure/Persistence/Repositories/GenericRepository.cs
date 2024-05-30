@@ -7,7 +7,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 {
     private readonly ApplicationDbContext _context;
 
-    protected GenericRepository(ApplicationDbContext context) => _context = context;
+    public GenericRepository(ApplicationDbContext context) => _context = context;
 
     public void Create(TEntity entity) => _context.Set<TEntity>().Add(entity);
 

@@ -14,6 +14,7 @@ public class Employee : BaseEntity
     public DateTime HireDate { get; set; }
     public Gender Gender { get; set; }
     public string? Email { get; set; }
+    public ICollection<Appointment> Appointments { get; set; } = [];
 
     public Employee() { }
 
