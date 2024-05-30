@@ -10,6 +10,19 @@ internal class AppointmentEntityTypeConfiguration : IEntityTypeConfiguration<App
         appointmentConfiguration.HasKey(x => x.Id);
         appointmentConfiguration.Property(x => x.Id).ValueGeneratedOnAdd();
 
+        appointmentConfiguration.Property(x => x.EmployeeId).IsRequired();
+        appointmentConfiguration.Property(x => x.PatientId).IsRequired();
+
+        appointmentConfiguration.Property(x => x.AppointmentDate)
+          .HasColumnType("date")
+          .IsRequired();
+
+        appointmentConfiguration.Property(x => x.AppointmentTime)
+         .HasConversion(
+            v => v.TimeOfDay, // Convert DateTime to TimeSpan
+            v => DateTime.Today.Add(v)
+            ).IsRequired();
+
         appointmentConfiguration.HasOne(x => x.Employee)
             .WithMany(x => x.Appointments)
             .HasForeignKey(x => x.EmployeeId)

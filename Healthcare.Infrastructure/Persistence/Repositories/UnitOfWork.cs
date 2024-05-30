@@ -5,6 +5,10 @@ namespace Healthcare.Infrastructure.Persistence.Repositories;
 public sealed class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _context;
+    public IEmployeeRepository EmployeeRepository { get; }
+    public IPatientRepository PatientRepository { get; }
+    public IAppointmentRepository AppointmentRepository { get; }
+    public IDepartmentRepository DepartmentRepository { get; }
 
     public UnitOfWork(ApplicationDbContext context)
     {
@@ -12,12 +16,8 @@ public sealed class UnitOfWork : IUnitOfWork
         EmployeeRepository ??= new EmployeeRepository(_context);
         PatientRepository ??= new PatientRepository(_context);
         AppointmentRepository ??= new AppointmentRepository(_context);
+        DepartmentRepository ??= new DepartmentRepository(_context);
     }
-
-    public IEmployeeRepository EmployeeRepository { get; }
-    public IPatientRepository PatientRepository { get; }
-
-    public IAppointmentRepository AppointmentRepository { get; }
 
     public async Task CommitAsync() => await _context.SaveChangesAsync();
 

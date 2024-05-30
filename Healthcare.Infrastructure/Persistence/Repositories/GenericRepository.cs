@@ -6,6 +6,8 @@ namespace Healthcare.Infrastructure.Persistence.Repositories;
 public class GenericRepository<TEntity>(ApplicationDbContext context) : IGenericRepository<TEntity>
     where TEntity : BaseEntity
 {
+    public bool CheckExists(string id) => context.Set<TEntity>().Any(x => x.Id == id);
+
     public void Create(TEntity entity) => context.Set<TEntity>().Add(entity);
 
     public void Delete(TEntity entity) => context.Remove(entity);

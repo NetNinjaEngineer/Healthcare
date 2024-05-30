@@ -12,5 +12,6 @@ public class MappingProfile : Profile
         CreateMap<Employee, EmployeeForListDto>()
             .ForMember(e => e.Gender, options => options.MapFrom(e => e.Gender.ToString()));
         CreateMap<PatientForCreateDto, Patient>();
+        CreateMap<AppointmentForCreateDto, Appointment>();
     }
 }

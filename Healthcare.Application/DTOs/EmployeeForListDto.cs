@@ -1,5 +1,5 @@
 ﻿namespace Healthcare.Application.DTOs;
-public sealed class EmployeeForListDto
+public sealed class EmployeeForListDto : BaseEntityDto
 {
     public string? FirstName { get; set; }
     public string? LastName { get; set; }

@@ -8,4 +8,5 @@ public interface IGenericRepository<TEntity> where TEntity : BaseEntity
     void Create(TEntity entity);
     void Update(TEntity entity);
     void Delete(TEntity entity);
+    bool CheckExists(string id);
 }
