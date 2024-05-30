@@ -32,7 +32,6 @@ public class Employee : BaseEntity
         _email = email;
 
         AddEmployeeCreatedDomainEvent(Id);
-        _email = email;
     }
 
     public string FirstName => _firstName;

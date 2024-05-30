@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using Healthcare.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System.Net;
-using System.Text.Json;
 
 namespace Healthcare.Application.Middleware;
 public class GlobalExceptionHandingMiddleware
@@ -55,27 +55,25 @@ public class GlobalExceptionHandingMiddleware
 
             default:
                 statusCode = HttpStatusCode.InternalServerError;
-                jsonErrorResponse = new JsonErrorResponse("Server error", (int)statusCode, null);
+                jsonErrorResponse = new JsonErrorResponse($"Server error: {exception.Message}", (int)statusCode, null);
                 break;
         }
-
-        var serializedJsonErrorResponse = JsonSerializer.Serialize(jsonErrorResponse);
-        await context.Response.WriteAsync(serializedJsonErrorResponse);
+        context.Response.StatusCode = (int)statusCode;
+        var serializedResponse = JsonConvert.SerializeObject(jsonErrorResponse);
+        await context.Response.WriteAsync(serializedResponse);
     }
 
     internal class JsonErrorResponse
     {
-        private readonly string? _errorMessage;
-        private readonly int? _statusCode;
-        private readonly List<string>? _validationErrors;
-
-        public JsonErrorResponse() { }
-
-        public JsonErrorResponse(string? errorMessage, int? statusCode, List<string>? validationErrors)
+        public JsonErrorResponse(string? errorMessage, int statusCode, List<string>? validationErrors)
         {
-            _errorMessage = errorMessage;
-            _statusCode = statusCode;
-            _validationErrors = validationErrors;
+            ErrorMessage = errorMessage;
+            StatusCode = statusCode;
+            ValidationErrors = validationErrors;
         }
+
+        public string? ErrorMessage { get; private set; }
+        public int StatusCode { get; private set; }
+        public List<string>? ValidationErrors { get; private set; }
     }
 }
