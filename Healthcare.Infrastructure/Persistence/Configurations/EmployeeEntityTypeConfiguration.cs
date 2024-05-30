@@ -68,5 +68,10 @@ public class EmployeeEntityTypeConfiguration : IEntityTypeConfiguration<Employee
                 g => g.ToString(),
                 g => (Gender)Enum.Parse(typeof(Gender), g)
             );
+
+        employeeConfiguration.HasOne(e => e.Department)
+            .WithMany(d => d.Employees)
+            .HasForeignKey(e => e.DepartmentId)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }

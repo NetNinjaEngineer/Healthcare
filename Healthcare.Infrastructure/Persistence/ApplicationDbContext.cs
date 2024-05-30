@@ -10,6 +10,7 @@ public sealed class ApplicationDbContext : DbContext
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Appointment> Appointments { get; set; }
     public DbSet<Patient> Patients { get; set; }
+    public DbSet<Department> Departments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -20,6 +21,7 @@ public sealed class ApplicationDbContext : DbContext
         //TODO: Complete configuration
         modelBuilder.ApplyConfiguration(new PatientEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new AppointmentEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new DepartmentEntityTypeConfiguration());
 
     }
 

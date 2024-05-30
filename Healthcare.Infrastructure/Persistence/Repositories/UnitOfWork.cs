@@ -11,10 +11,13 @@ public sealed class UnitOfWork : IUnitOfWork
         _context = context;
         EmployeeRepository ??= new EmployeeRepository(_context);
         PatientRepository ??= new PatientRepository(_context);
+        AppointmentRepository ??= new AppointmentRepository(_context);
     }
 
     public IEmployeeRepository EmployeeRepository { get; }
     public IPatientRepository PatientRepository { get; }
+
+    public IAppointmentRepository AppointmentRepository { get; }
 
     public async Task CommitAsync() => await _context.SaveChangesAsync();
 

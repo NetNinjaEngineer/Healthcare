@@ -14,12 +14,15 @@ public class Employee : BaseEntity
     public DateTime HireDate { get; set; }
     public Gender Gender { get; set; }
     public string? Email { get; set; }
+    public string? DepartmentId { get; set; }
+    public Department? Department { get; set; }
     public ICollection<Appointment> Appointments { get; set; } = [];
 
     public Employee() { }
 
     public Employee(string? firstName, string? lastName, string? phone,
-        string? jobTitle, decimal salary, DateTime dateOfBirth, DateTime hireDate, Gender gender, string? email)
+        string? jobTitle, decimal salary, DateTime dateOfBirth,
+        DateTime hireDate, Gender gender, string? email, string departmentId)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -30,6 +33,7 @@ public class Employee : BaseEntity
         HireDate = hireDate;
         Gender = gender;
         Email = email;
+        DepartmentId = departmentId;
     }
 
     public string? GetFirstName() => FirstName;
@@ -41,6 +45,7 @@ public class Employee : BaseEntity
     public Gender GetGender() => Gender;
     public decimal GetSalary() => Salary;
     public string? GetEmail() => Email;
+    public string? GetFullName() => string.Concat(GetFirstName(), " ", GetLastName());
 
     public int GetEmployeeAge()
     {
