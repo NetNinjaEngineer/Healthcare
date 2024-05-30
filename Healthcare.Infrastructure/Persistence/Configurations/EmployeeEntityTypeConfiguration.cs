@@ -16,71 +16,54 @@ public class EmployeeEntityTypeConfiguration : IEntityTypeConfiguration<Employee
         employeeConfiguration.Property(e => e.Id).ValueGeneratedOnAdd();
 
         employeeConfiguration
-            .Property<string>("_firstName")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("FirstName")
+            .Property(e => e.FirstName)
             .HasColumnType("varchar")
             .HasMaxLength(50)
             .IsRequired();
 
         employeeConfiguration
-            .Property<string>("_email")
-            .HasColumnName("Email")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
+            .Property(e => e.Email)
             .HasColumnType("varchar")
             .HasMaxLength(125)
             .IsRequired();
 
         employeeConfiguration
-            .Property<string>("_jobTitle")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("JobTitle")
+            .Property(e => e.JobTitle)
             .HasColumnType("varchar")
             .HasMaxLength(50)
             .IsRequired();
 
         employeeConfiguration
-            .Property<string>("_lastName")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("LastName")
+            .Property(e => e.LastName)
             .HasColumnType("varchar")
             .HasMaxLength(50)
             .IsRequired();
 
 
         employeeConfiguration
-            .Property<string>("_phone")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("Phone")
+            .Property(e => e.Phone)
             .HasColumnType("varchar")
             .HasMaxLength(20)
             .IsRequired();
 
         employeeConfiguration
-            .Property<DateTime>("_hireDate")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
+            .Property(e => e.HireDate)
             .HasColumnName("HireDate")
             .HasColumnType("DATE")
             .IsRequired();
 
         employeeConfiguration
-            .Property<DateTime>("_dateOfBirth")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("DateOfBirth")
+            .Property(e => e.DateOfBirth)
             .HasColumnType("DATE")
             .IsRequired();
 
         employeeConfiguration
-            .Property<decimal>("_salary")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("Salary")
+            .Property(e => e.Salary)
             .HasColumnType("decimal(18, 2)")
             .IsRequired();
 
         employeeConfiguration
-            .Property<Gender>("_gender")
-            .HasColumnName("Gender")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
+            .Property(e => e.Gender)
             .HasConversion(
                 g => g.ToString(),
                 g => (Gender)Enum.Parse(typeof(Gender), g)

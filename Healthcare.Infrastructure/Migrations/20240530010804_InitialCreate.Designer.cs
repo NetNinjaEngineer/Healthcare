@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Healthcare.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240529213816_AddEmailFieldToEmployeeTable")]
-    partial class AddEmailFieldToEmployeeTable
+    [Migration("20240530010804_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,52 +31,44 @@ namespace Healthcare.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("_dateOfBirth")
-                        .HasColumnType("DATE")
-                        .HasColumnName("DateOfBirth");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("DATE");
 
-                    b.Property<string>("_email")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(125)
-                        .HasColumnType("varchar")
-                        .HasColumnName("Email");
+                        .HasColumnType("varchar");
 
-                    b.Property<string>("_firstName")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar")
-                        .HasColumnName("FirstName");
+                        .HasColumnType("varchar");
 
-                    b.Property<string>("_gender")
+                    b.Property<string>("Gender")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Gender");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("_hireDate")
+                    b.Property<DateTime>("HireDate")
                         .HasColumnType("DATE")
                         .HasColumnName("HireDate");
 
-                    b.Property<string>("_jobTitle")
+                    b.Property<string>("JobTitle")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar")
-                        .HasColumnName("JobTitle");
+                        .HasColumnType("varchar");
 
-                    b.Property<string>("_lastName")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar")
-                        .HasColumnName("LastName");
+                        .HasColumnType("varchar");
 
-                    b.Property<string>("_phone")
+                    b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("varchar")
-                        .HasColumnName("Phone");
+                        .HasColumnType("varchar");
 
-                    b.Property<decimal>("_salary")
-                        .HasColumnType("decimal(18, 2)")
-                        .HasColumnName("Salary");
+                    b.Property<decimal>("Salary")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id");
 

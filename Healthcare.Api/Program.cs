@@ -1,6 +1,8 @@
 using Healthcare.Application;
 using Healthcare.Application.Middleware;
 using Healthcare.Infrastructure;
+using Healthcare.Infrastructure.Persistence;
+using Healthcare.Infrastructure.Persistence.DataSeed;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(options =>
@@ -19,6 +21,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var databaseContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    SeedDatabase.Seed(databaseContext);
 }
 
 app.UseMiddleware<GlobalExceptionHandingMiddleware>();
