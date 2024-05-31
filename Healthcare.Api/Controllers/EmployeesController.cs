@@ -3,6 +3,7 @@ using Healthcare.Application.Commands.DeleteEmployee;
 using Healthcare.Application.Commands.PromoteEmployee;
 using Healthcare.Application.Commands.UpdateEmployee;
 using Healthcare.Application.DTOs.Employee;
+using Healthcare.Application.Filters;
 using Healthcare.Application.Queries.GetAllEmployees;
 using Healthcare.Application.Queries.GetEmployeeDetails;
 using Healthcare.Domain.Entities;
@@ -34,6 +35,7 @@ public class EmployeesController(IMediator mediator) : ControllerBase
         => Ok(await mediator.Send(new GetEmployeeDetailsQuery(id)));
 
     [HttpPut("{id}")]
+    [ServiceFilter<EmployeeExistsFilter>]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<ActionResult<IEnumerable<Employee>>> UpdateEmployee(string id,

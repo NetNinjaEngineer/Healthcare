@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Healthcare.Application.Filters;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace Healthcare.Application;
@@ -10,6 +11,8 @@ public static class ApplicationServicesRegistration
             options.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+        services.AddScoped<EmployeeExistsFilter>();
 
         return services;
     }
