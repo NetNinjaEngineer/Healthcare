@@ -25,9 +25,10 @@ public sealed class ScheduleAppointmentCommandHandler
         var patient = await _unitOfWork.PatientRepository.GetByIdAsync(request.PatientId)
             ?? throw new PatientNotFoundException($"Patient with id: {request.PatientId} not founded.");
 
-        //bool departmentExists = _unitOfWork.DepartmentRepository.CheckExists(request.DepartmentId);
-        //if (!departmentExists)
-        //    throw new DepartmentNotFoundException($"Department with id: {request.DepartmentId} not founded.");
+        // TODO: There are no departments data
+        bool departmentExists = _unitOfWork.DepartmentRepository.CheckExists(request.DepartmentId);
+        if (!departmentExists)
+            throw new DepartmentNotFoundException($"Department with id: {request.DepartmentId} not founded.");
 
         var scheduleAppointment = _mapper.Map<Appointment>(request.Appointment);
 

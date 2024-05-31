@@ -23,7 +23,7 @@ public class Employee : BaseEntity
 
     public Employee(string? firstName, string? lastName, string? phone,
         string? jobTitle, decimal salary, DateTime dateOfBirth,
-        DateTime hireDate, Gender gender, string? email, string departmentId)
+        DateTime hireDate, Gender gender, string? email, string departmentId, Address address)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -35,6 +35,7 @@ public class Employee : BaseEntity
         Gender = gender;
         Email = email;
         DepartmentId = departmentId;
+        Address = address;
     }
 
     public string? GetFirstName() => FirstName;
@@ -81,6 +82,4 @@ public class Employee : BaseEntity
 
         AddDomainEvent(employeePromotedDomainEvent);
     }
-
-
 }
