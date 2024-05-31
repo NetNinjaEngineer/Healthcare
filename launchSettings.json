@@ -4,7 +4,8 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "healthcare.api": "StartDebugging"
+        "healthcare.api": "StartDebugging",
+        "healthcare.webui": "StartDebugging"
       }
     }
   }

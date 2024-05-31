@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  healthcare.api:
-    image: ${DOCKER_REGISTRY-}healthcareapi
+  healthcare.webui:
+    image: ${DOCKER_REGISTRY-}healthcarewebui
     build:
       context: .
-      dockerfile: Healthcare.Api/Dockerfile
+      dockerfile: Healthcare.WebUI/Dockerfile
