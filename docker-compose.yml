@@ -3,6 +3,20 @@ version: '3.4'
 services:
   healthcare.webui:
     image: ${DOCKER_REGISTRY-}healthcarewebui
+    container_name: webui
     build:
       context: .
       dockerfile: Healthcare.WebUI/Dockerfile
+  healthcare.api:
+    image: ${DOCKER_REGISTRY-}healthcareapi
+    container_name: api
+    build:
+        context: .
+        dockerfile: Healthcare.Api/Dockerfile
+  healthcare.db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: healthcaredb
+    restart: always
+    environment:
+        MSSQL_SA_PASSWORD: Password@123!#
+        ACCEPT_EULA: "Y"
