@@ -16,6 +16,7 @@ public class Employee : BaseEntity
     public string? Email { get; set; }
     public string? DepartmentId { get; set; }
     public Department? Department { get; set; }
+    public Address Address { get; set; }
     public ICollection<Appointment> Appointments { get; set; } = [];
 
     public Employee() { }

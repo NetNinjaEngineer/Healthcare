@@ -16,50 +16,36 @@ public class EmployeeEntityTypeConfiguration : IEntityTypeConfiguration<Employee
         employeeConfiguration.Property(e => e.Id).ValueGeneratedOnAdd();
 
         employeeConfiguration
-            .Property(e => e.FirstName)
-            .HasColumnType("varchar")
-            .HasMaxLength(50)
-            .IsRequired();
+            .Property(e => e.FirstName).HasColumnType("varchar").HasMaxLength(50).IsRequired();
 
         employeeConfiguration
-            .Property(e => e.Email)
-            .HasColumnType("varchar")
-            .HasMaxLength(125)
-            .IsRequired();
+            .Property(e => e.Email).HasColumnType("varchar")
+            .HasMaxLength(125).IsRequired();
 
         employeeConfiguration
-            .Property(e => e.JobTitle)
-            .HasColumnType("varchar")
-            .HasMaxLength(50)
-            .IsRequired();
+            .Property(e => e.JobTitle).HasColumnType("varchar")
+            .HasMaxLength(50).IsRequired();
 
         employeeConfiguration
-            .Property(e => e.LastName)
-            .HasColumnType("varchar")
-            .HasMaxLength(50)
+            .Property(e => e.LastName).HasColumnType("varchar").HasMaxLength(50)
             .IsRequired();
 
 
         employeeConfiguration
-            .Property(e => e.Phone)
-            .HasColumnType("varchar")
-            .HasMaxLength(20)
-            .IsRequired();
+            .Property(e => e.Phone).HasColumnType("varchar")
+            .HasMaxLength(20).IsRequired();
 
         employeeConfiguration
             .Property(e => e.HireDate)
-            .HasColumnName("HireDate")
-            .HasColumnType("DATE")
+            .HasColumnName("HireDate").HasColumnType("DATE")
             .IsRequired();
 
         employeeConfiguration
-            .Property(e => e.DateOfBirth)
-            .HasColumnType("DATE")
+            .Property(e => e.DateOfBirth).HasColumnType("DATE")
             .IsRequired();
 
         employeeConfiguration
-            .Property(e => e.Salary)
-            .HasColumnType("decimal(18, 2)")
+            .Property(e => e.Salary).HasColumnType("decimal(18, 2)")
             .IsRequired();
 
         employeeConfiguration
@@ -70,8 +56,40 @@ public class EmployeeEntityTypeConfiguration : IEntityTypeConfiguration<Employee
             );
 
         employeeConfiguration.HasOne(e => e.Department)
-            .WithMany(d => d.Employees)
-            .HasForeignKey(e => e.DepartmentId)
+            .WithMany(d => d.Employees).HasForeignKey(e => e.DepartmentId)
             .OnDelete(DeleteBehavior.SetNull);
+
+        employeeConfiguration.OwnsOne(e => e.Address, address =>
+        {
+            address.Property(e => e.City)
+                .HasColumnName("City")
+                .HasColumnType("varchar")
+                .HasMaxLength(50).IsRequired();
+
+            address.Property(e => e.Country)
+                .HasColumnType("varchar")
+                .HasColumnName("Country")
+                .HasMaxLength(50)
+                .IsRequired();
+
+            address.Property(e => e.Street)
+                .HasColumnName("Street")
+                .HasColumnType("varchar")
+                .HasMaxLength(50)
+                .IsRequired();
+
+            address.Property(e => e.State)
+                .HasColumnName("State")
+                .HasColumnType("varchar")
+                .HasMaxLength(20)
+                .IsRequired();
+
+            address.Property(e => e.PostalCode)
+                .HasColumnName("PostalCode")
+                .HasColumnType("varchar")
+                .HasMaxLength(10)
+                .IsRequired();
+
+        });
     }
 }
