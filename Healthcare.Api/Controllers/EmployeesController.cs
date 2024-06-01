@@ -6,6 +6,7 @@ using Healthcare.Application.DTOs.Employee;
 using Healthcare.Application.Filters;
 using Healthcare.Application.Queries.GetAllEmployees;
 using Healthcare.Application.Queries.GetEmployeeDetails;
+using Healthcare.Application.Strategies.DataExport.Models;
 using Healthcare.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -25,8 +26,8 @@ public class EmployeesController(IMediator mediator) : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<EmployeeForListDto>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<EmployeeForListDto>>> GetEmployees()
-        => Ok(await mediator.Send(new GetAllEmployeesQuery()));
+    public async Task<ActionResult<IEnumerable<EmployeeForListDto>>> GetEmployees([FromQuery] ExportFormat format)
+        => Ok(await mediator.Send(new GetAllEmployeesQuery() { ExportFormat = format }));
 
     [HttpGet("{id}", Name = "GetEmployee")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -22,4 +22,9 @@
     <ProjectReference Include="..\Healthcare.Infrastructure\Healthcare.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\Files\" />
+  </ItemGroup>
+
 </Project>
