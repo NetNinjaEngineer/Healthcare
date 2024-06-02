@@ -83,6 +83,7 @@ public sealed class EmployeeBuilder
     {
         return new Employee
         {
+            Id = Guid.NewGuid().ToString(),
             FirstName = _firstName,
             LastName = _lastName,
             DateOfBirth = _birthDate!.Value,

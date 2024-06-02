@@ -10,6 +10,9 @@ public class GenericRepository<TEntity>(ApplicationDbContext context) : IGeneric
 
     public void Create(TEntity entity) => context.Set<TEntity>().Add(entity);
 
+    public void CreateCollection(IEnumerable<TEntity> colllection)
+        => context.BulkInsert(colllection);
+
     public void Delete(TEntity entity) => context.Remove(entity);
 
     public async Task<IEnumerable<TEntity>> GetAllAsync()

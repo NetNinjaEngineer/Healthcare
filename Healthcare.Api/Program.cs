@@ -5,6 +5,7 @@ using Healthcare.Infrastructure.Persistence;
 using Healthcare.Infrastructure.Persistence.SeedWork;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(options =>
@@ -13,7 +14,9 @@ builder.Services.AddControllers(options =>
     options.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status406NotAcceptable));
     options.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status500InternalServerError));
     options.OutputFormatters.RemoveType<StringOutputFormatter>();
-});
+}).AddJsonOptions(options =>
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices();

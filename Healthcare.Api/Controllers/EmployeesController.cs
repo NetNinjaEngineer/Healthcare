@@ -1,4 +1,5 @@
 ﻿using Healthcare.Application.Commands.CreateEmployee;
+using Healthcare.Application.Commands.CreateEmployeeCollection;
 using Healthcare.Application.Commands.DeleteEmployee;
 using Healthcare.Application.Commands.PromoteEmployee;
 using Healthcare.Application.Commands.UpdateEmployee;
@@ -73,6 +74,16 @@ public class EmployeesController(IMediator mediator) : ControllerBase
         var (fileBytes, fileMimeType, fileExtemsion) = await mediator.Send(new EmployeeReportQuery(exportType));
 
         return File(fileBytes, fileMimeType, $"employees{fileExtemsion}");
+    }
+
+    [Route("create-collection")]
+    [HttpPost]
+    public async Task<ActionResult<IEnumerable<EmployeeForListDto>>> CreateCollection(
+        [FromBody] List<EmployeeForCreateDto> employees)
+    {
+        var employeeCollection = await mediator.Send(
+            new CreateEmployeeCollectionCommand { Employees = employees });
+        return Ok(employeeCollection);
     }
 
 }
