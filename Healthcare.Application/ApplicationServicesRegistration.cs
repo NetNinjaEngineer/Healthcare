@@ -1,5 +1,7 @@
-﻿using Healthcare.Application.Filters;
-using Healthcare.Application.Strategies.DataExport;
+﻿using DinkToPdf;
+using DinkToPdf.Contracts;
+using Healthcare.Application.Filters;
+using Healthcare.Application.Strategies.Reporting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -12,9 +14,10 @@ public static class ApplicationServicesRegistration
             options.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddScoped<EmployeeExistsFilter>();
-        services.AddScoped<IDataExportStrategy, CSVExportStrategy>();
-        services.AddScoped<IDataExportStrategy, PDFExportStrategy>();
-        services.AddScoped<ExportDataContext>();
+        services.AddScoped<IReportStrategy, PDFReportStrategy>();
+        services.AddScoped<IReportStrategy, CSVReportStrategy>();
+        services.AddScoped<ReportStrategyContext>();
+        services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
         return services;
     }

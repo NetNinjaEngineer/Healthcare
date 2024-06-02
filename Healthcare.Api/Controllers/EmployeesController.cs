@@ -4,9 +4,10 @@ using Healthcare.Application.Commands.PromoteEmployee;
 using Healthcare.Application.Commands.UpdateEmployee;
 using Healthcare.Application.DTOs.Employee;
 using Healthcare.Application.Filters;
+using Healthcare.Application.Queries.EmployeeReport;
 using Healthcare.Application.Queries.GetAllEmployees;
 using Healthcare.Application.Queries.GetEmployeeDetails;
-using Healthcare.Application.Strategies.DataExport.Models;
+using Healthcare.Application.Strategies.Reporting;
 using Healthcare.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -26,8 +27,8 @@ public class EmployeesController(IMediator mediator) : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<EmployeeForListDto>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<EmployeeForListDto>>> GetEmployees([FromQuery] ExportFormat format)
-        => Ok(await mediator.Send(new GetAllEmployeesQuery() { ExportFormat = format }));
+    public async Task<ActionResult<IEnumerable<EmployeeForListDto>>> GetEmployees()
+        => Ok(await mediator.Send(new GetAllEmployeesQuery()));
 
     [HttpGet("{id}", Name = "GetEmployee")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -63,6 +64,15 @@ public class EmployeesController(IMediator mediator) : ControllerBase
     {
         await mediator.Send(new PromoteEmployeeCommand() { EmployeeId = id, PromoteEmployeeModel = body });
         return NoContent();
+    }
+
+    [Route("export")]
+    [HttpGet]
+    public async Task<IActionResult> Report(ExportType exportType)
+    {
+        var (fileBytes, fileMimeType, fileExtemsion) = await mediator.Send(new EmployeeReportQuery(exportType));
+
+        return File(fileBytes, fileMimeType, $"employees{fileExtemsion}");
     }
 
 }

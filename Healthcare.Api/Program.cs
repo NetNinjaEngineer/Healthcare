@@ -35,6 +35,8 @@ using (var scope = app.Services.CreateScope())
     await SeedDatabase.Seed(databaseContext);
 }
 
+app.UseStaticFiles();
+
 app.UseMiddleware<GlobalExceptionHandingMiddleware>();
 
 app.UseMiddleware<LoggingMiddleware>();
