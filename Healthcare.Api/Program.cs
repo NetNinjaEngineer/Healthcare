@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Healthcare.Application;
 using Healthcare.Application.Middleware;
 using Healthcare.Infrastructure;
@@ -21,6 +22,22 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
+
+builder.Services.AddApiVersioning(opt =>
+{
+    opt.DefaultApiVersion = new ApiVersion(1, 0);
+    opt.ReportApiVersions = true;
+    opt.AssumeDefaultVersionWhenUnspecified = true;
+    opt.ApiVersionReader = ApiVersionReader.Combine(
+        new QueryStringApiVersionReader("api-version"),
+        new HeaderApiVersionReader("X-version"),
+        new MediaTypeApiVersionReader("ver"));
+})
+    .AddApiExplorer(opt =>
+    {
+        opt.GroupNameFormat = "'v'VVV"; //  format the version as “‘v’major[.minor][-status]”.
+        opt.SubstituteApiVersionInUrl = true; // necessary when versioning by the URI segment
+    });
 
 builder.Services.AddCors();
 

@@ -1,4 +1,5 @@
-﻿using Healthcare.Application.Commands.CancelAppointment;
+﻿using Asp.Versioning;
+using Healthcare.Application.Commands.CancelAppointment;
 using Healthcare.Application.Commands.ScheduleAppointment;
 using Healthcare.Application.DTOs.Appointment;
 using Healthcare.Application.Queries.GetAllAppointmentsForPatient;
@@ -8,6 +9,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Healthcare.Api.Controllers;
+[ApiVersion("1.0")]
 [Route("api/patients/{patientId}/appointments")]
 [ApiController]
 public class AppointmentsController(IMediator mediator) : ControllerBase

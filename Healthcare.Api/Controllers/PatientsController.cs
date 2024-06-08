@@ -1,4 +1,5 @@
-﻿using Healthcare.Application.Commands.CreatePatient;
+﻿using Asp.Versioning;
+using Healthcare.Application.Commands.CreatePatient;
 using Healthcare.Application.Commands.DeletePatient;
 using Healthcare.Application.Commands.UpdatePatient;
 using Healthcare.Application.DTOs.Patient;
@@ -8,6 +9,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Healthcare.Api.Controllers;
+[ApiVersion("1.0")]
 [Route("api/patients")]
 [ApiController]
 public class PatientsController(IMediator mediator) : ControllerBase

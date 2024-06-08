@@ -1,4 +1,5 @@
-﻿using Healthcare.Application.Commands.CreateEmployee;
+﻿using Asp.Versioning;
+using Healthcare.Application.Commands.CreateEmployee;
 using Healthcare.Application.Commands.CreateEmployeeCollection;
 using Healthcare.Application.Commands.DeleteEmployee;
 using Healthcare.Application.Commands.PromoteEmployee;
@@ -14,6 +15,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Healthcare.Api.Controllers;
+[ApiVersion("1.0")]
 [Route("api/employees")]
 [ApiController]
 public class EmployeesController(IMediator mediator) : ControllerBase
