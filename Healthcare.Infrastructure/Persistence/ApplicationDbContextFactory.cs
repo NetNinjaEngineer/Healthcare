@@ -1,5 +1,4 @@
-﻿using Healthcare.Domain.Interceptors;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
@@ -15,8 +14,7 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
 
         var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 
-        optionBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
-            .AddInterceptors(new SoftDeletableInterceptor());
+        optionBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 
         return new ApplicationDbContext(optionBuilder.Options);
     }

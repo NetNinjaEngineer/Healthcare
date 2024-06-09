@@ -5,6 +5,7 @@ using Healthcare.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Healthcare.Infrastructure;
 public static class InfrastructureServicesRegistration
@@ -15,6 +16,7 @@ public static class InfrastructureServicesRegistration
     {
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+            .LogTo(Console.WriteLine, LogLevel.Information)
             .AddInterceptors(new SoftDeletableInterceptor()));
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
