@@ -17,7 +17,9 @@ public static class InfrastructureServicesRegistration
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
             .LogTo(Console.WriteLine, LogLevel.Information)
-            .AddInterceptors(new SoftDeletableInterceptor()));
+            .AddInterceptors([
+                new SoftDeletableInterceptor(),
+                new EmployeeLogsSaveChangesInterceptor()]));
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 

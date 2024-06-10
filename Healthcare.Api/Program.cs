@@ -4,6 +4,7 @@ using Healthcare.Application.Middleware;
 using Healthcare.Infrastructure;
 using Healthcare.Infrastructure.Persistence;
 using Healthcare.Infrastructure.Persistence.SeedWork;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using System.Text.Json.Serialization;
@@ -40,6 +41,16 @@ builder.Services.AddApiVersioning(opt =>
     });
 
 builder.Services.AddCors();
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Limits.MaxRequestBodySize = 250 * 1024 * 1024;
+});
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 250 * 1024 * 1024;
+});
 
 var app = builder.Build();
 

@@ -26,7 +26,7 @@ public sealed class EmployeeLogsSaveChangesInterceptor
                 EmployeeId = employee.Entity.Id
             };
 
-            context.Add(employeeLog);
+            context.Set<EmployeeLog>().Add(employeeLog);
 
             context.SaveChanges();
         }
