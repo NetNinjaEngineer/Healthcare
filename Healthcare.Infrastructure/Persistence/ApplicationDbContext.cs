@@ -13,6 +13,9 @@ public sealed class ApplicationDbContext(DbContextOptions options) : DbContext(o
     public DbSet<Patient> Patients { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<MedicalDepartment> MedicalDepartments { get; set; }
+    public DbSet<Prescription> Prescriptions { get; set; }
+    public DbSet<Medication> Medications { get; set; }
+    public DbSet<PrescriptionMedication> PrescriptionMedications { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

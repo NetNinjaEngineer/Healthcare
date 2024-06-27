@@ -2,6 +2,7 @@ namespace Healthcare.Domain.Entities;
 
 public class Appointment : BaseEntity
 {
+    public string? Reason { get; set; }
     public DateOnly DateOfAppointment { get; set; }
     public TimeOnly TimeOfAppointment { get; set; }
     public bool Paid { get; set; }
