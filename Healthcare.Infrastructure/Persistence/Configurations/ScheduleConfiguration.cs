@@ -1,4 +1,5 @@
 ﻿using Healthcare.Domain.Entities;
+using Healthcare.Domain.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,6 +11,12 @@ public class ScheduleConfiguration : IEntityTypeConfiguration<Schedule>
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
+
+        builder.Property(x => x.Title)
+            .HasConversion(
+                x => x.ToString(),
+                x => (ScheduleEnum)Enum.Parse(typeof(ScheduleEnum), x)
+            );
 
         builder.OwnsOne(x => x.TimeSlot,
             ts =>
