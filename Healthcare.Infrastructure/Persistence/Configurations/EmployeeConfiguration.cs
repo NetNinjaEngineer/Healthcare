@@ -8,7 +8,6 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 {
     public void Configure(EntityTypeBuilder<Employee> builder)
     {
-        builder.ToTable("Employees");
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id)
@@ -85,6 +84,14 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
             .IsRequired();
         });
 
-        builder.UseTpcMappingStrategy();
+        builder.HasOne(x => x.Schedule)
+            .WithMany(x => x.Employees)
+            .HasForeignKey(x => x.ScheduleId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        builder.ToTable("Employees");
+
+        builder.UseTptMappingStrategy();
     }
 }

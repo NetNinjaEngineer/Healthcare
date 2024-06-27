@@ -10,22 +10,12 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-        builder.Property(x => x.DoctorId).IsRequired();
-        builder.Property(x => x.PatientId).IsRequired();
-
-        builder.Property(x => x.AppointmentDate)
+        builder.Property(x => x.DateOfAppointment)
           .HasColumnType("date")
           .IsRequired();
 
-        builder.Property(x => x.AppointmentTime)
-         .HasConversion(
-            v => v.TimeOfDay,
-            v => DateTime.Today.Add(v)
-            ).IsRequired();
-
-        builder.HasOne(x => x.Patient)
-            .WithMany(x => x.Appointments)
-            .HasForeignKey(x => x.PatientId)
+        builder.Property(x => x.TimeOfAppointment)
+            .HasColumnType("time")
             .IsRequired();
 
         builder.ToTable("Appointments");

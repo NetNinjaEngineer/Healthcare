@@ -41,9 +41,9 @@ public sealed class ScheduleAppointmentCommandHandler
         return new ScheduleAppointmentResponse
         {
             AppointmentId = scheduleAppointment.Id,
-            DateOfAppointment = scheduleAppointment.AppointmentDate,
+            DateOfAppointment = scheduleAppointment.DateOfAppointment,
             PatientId = patient.Id,
-            TimeOfAppointment = scheduleAppointment.AppointmentTime,
+            TimeOfAppointment = scheduleAppointment.TimeOfAppointment,
             Doctor = doctor.FirstName!
         };
     }

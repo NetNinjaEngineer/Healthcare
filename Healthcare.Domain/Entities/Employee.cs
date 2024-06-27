@@ -14,6 +14,8 @@ public abstract class Employee : BaseEntity
     public Gender Gender { get; set; }
     public string? Email { get; set; }
     public Address? Address { get; set; }
+    public string? ScheduleId { get; set; }
+    public Schedule? Schedule { get; set; }
 
     public int GetEmployeeAge()
     {

@@ -10,4 +10,5 @@ public class Patient : BaseEntity
     public string? Email { get; set; }
     public Gender Gender { get; set; }
     public ICollection<Appointment> Appointments { get; set; } = [];
+    public ICollection<Doctor> Doctors { get; set; } = [];
 }

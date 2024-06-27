@@ -5,6 +5,6 @@ public sealed class ScheduleAppointmentResponse
     public string? PatientId { get; set; } = string.Empty;
     public string? Department { get; set; } = string.Empty;
     public string? Doctor { get; set; } = string.Empty;
-    public DateTime DateOfAppointment { get; set; }
-    public DateTime TimeOfAppointment { get; set; }
+    public DateOnly DateOfAppointment { get; set; }
+    public TimeOnly TimeOfAppointment { get; set; }
 }

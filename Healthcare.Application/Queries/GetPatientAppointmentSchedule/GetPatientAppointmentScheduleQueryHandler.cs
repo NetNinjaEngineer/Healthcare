@@ -28,8 +28,8 @@ public sealed class GetPatientAppointmentScheduleQueryHandler(IUnitOfWork unitOf
         {
             AppointmentId = request.AppointmentId,
             PatientId = patientAppointmentSchedule.PatientId,
-            TimeOfAppointment = patientAppointmentSchedule.AppointmentTime,
-            DateOfAppointment = patientAppointmentSchedule.AppointmentDate,
+            TimeOfAppointment = patientAppointmentSchedule.TimeOfAppointment,
+            DateOfAppointment = patientAppointmentSchedule.DateOfAppointment,
 
             Doctor = doctor.FirstName ?? ""
         };

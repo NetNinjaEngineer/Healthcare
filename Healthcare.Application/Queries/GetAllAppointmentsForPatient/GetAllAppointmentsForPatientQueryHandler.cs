@@ -25,8 +25,8 @@ public sealed class GetAllAppointmentsForPatientQueryHandler(IUnitOfWork unitOfW
             appointmentResponses.Add(new()
             {
                 AppointmentId = patientAppointment.Id,
-                DateOfAppointment = patientAppointment.AppointmentDate,
-                TimeOfAppointment = patientAppointment.AppointmentTime,
+                DateOfAppointment = patientAppointment.DateOfAppointment,
+                TimeOfAppointment = patientAppointment.TimeOfAppointment,
                 PatientId = patientAppointment.PatientId
             });
         }

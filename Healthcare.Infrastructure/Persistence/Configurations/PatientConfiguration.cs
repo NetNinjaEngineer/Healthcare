@@ -36,15 +36,16 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
                 g => g.ToString(),
                 g => (Gender)Enum.Parse(typeof(Gender), g)
             );
-    }
-}
 
-public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
-{
-    public void Configure(EntityTypeBuilder<Doctor> builder)
-    {
-        builder.ToTable("Doctors");
-        builder.HasMany(x => x.Appointments)
-            .WithOne(x => x.Doctor)
+        builder.HasMany(x => x.Doctors)
+            .WithMany(x => x.Patients)
+            .UsingEntity<Appointment>(
+                left => left.HasOne(x => x.Doctor)
+                .WithMany(x => x.Appointments)
+                .HasForeignKey(x => x.DoctorId),
+                right => right.HasOne(x => x.Patient)
+                .WithMany(x => x.Appointments)
+                .HasForeignKey(x => x.PatientId)
+            );
     }
 }
