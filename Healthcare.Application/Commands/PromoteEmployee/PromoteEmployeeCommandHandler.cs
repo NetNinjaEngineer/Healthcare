@@ -1,6 +1,5 @@
 ﻿using Healthcare.Application.Interfaces;
 using Healthcare.Domain;
-using Healthcare.Domain.Events;
 using Healthcare.Domain.Exceptions;
 using MediatR;
 
@@ -31,10 +30,6 @@ public sealed class PromoteEmployeeCommandHandler
             employee.PromoteEmployee(request.PromoteEmployeeModel.SalaryIncrease);
         _unitOfWork.EmployeeRepository.Update(employee);
         await _unitOfWork.CommitAsync();
-        await _mediator.Publish(new EmployeePromotedDomainEvent(
-            request.PromoteEmployeeModel!.SalaryIncrease,
-            employee), cancellationToken);
-
         return Unit.Value;
     }
 }

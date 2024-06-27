@@ -44,8 +44,7 @@ public sealed class ScheduleAppointmentCommandHandler
             DateOfAppointment = scheduleAppointment.AppointmentDate,
             PatientId = patient.Id,
             TimeOfAppointment = scheduleAppointment.AppointmentTime,
-            Doctor = doctor.GetFullName()!
+            Doctor = doctor.FirstName!
         };
-        // todo: sending emails to user for feedback and make our domain events
     }
 }

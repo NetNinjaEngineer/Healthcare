@@ -4,42 +4,47 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Healthcare.Infrastructure.Persistence.Configurations;
-public class PatientEntityTypeConfiguration : IEntityTypeConfiguration<Patient>
+public class PatientConfiguration : IEntityTypeConfiguration<Patient>
 {
-    public void Configure(EntityTypeBuilder<Patient> patientConfiguration)
+    public void Configure(EntityTypeBuilder<Patient> builder)
     {
-        patientConfiguration.ToTable("Patients", "dbo");
+        builder.ToTable("Patients");
 
-        patientConfiguration.Ignore(e => e.DomainEvents);
+        builder.HasKey(e => e.Id);
 
-        patientConfiguration.HasKey(e => e.Id);
-
-        patientConfiguration.Property(e => e.Id)
+        builder.Property(e => e.Id)
             .ValueGeneratedOnAdd();
 
-        patientConfiguration.Property(e => e.FirstName)
+        builder.Property(e => e.FirstName)
             .HasColumnType("varchar").HasMaxLength(50)
             .IsRequired();
 
-        patientConfiguration.Property(e => e.Email)
+        builder.Property(e => e.Email)
             .HasColumnType("varchar").HasMaxLength(125)
             .IsRequired();
 
-        patientConfiguration.Property(e => e.LastName)
+        builder.Property(e => e.LastName)
             .HasColumnType("varchar").HasMaxLength(50)
             .IsRequired();
 
-
-        patientConfiguration.Property(e => e.Phone)
+        builder.Property(e => e.Phone)
             .HasColumnType("varchar").HasMaxLength(20)
             .IsRequired();
 
-        patientConfiguration
-            .Property(e => e.Gender)
+        builder.Property(e => e.Gender)
             .HasConversion(
                 g => g.ToString(),
                 g => (Gender)Enum.Parse(typeof(Gender), g)
             );
+    }
+}
 
+public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
+{
+    public void Configure(EntityTypeBuilder<Doctor> builder)
+    {
+        builder.ToTable("Doctors");
+        builder.HasMany(x => x.Appointments)
+            .WithOne(x => x.Doctor)
     }
 }

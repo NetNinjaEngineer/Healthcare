@@ -15,12 +15,14 @@ public sealed class GetPatientAppointmentScheduleQueryHandler(IUnitOfWork unitOf
         if (!patientExists)
             throw new PatientNotFoundException($"Patient not exists with id: {request.PatientId}");
 
-        var patientAppointmentSchedule = unitOfWork.AppointmentRepository.GetAllAsync()
-            .Result.Where(appointment =>
+        var patientAppointmentSchedule = (await unitOfWork.AppointmentRepository.GetAllAsync())
+            .Where(appointment =>
                 appointment.PatientId == request.PatientId &&
                 appointment.Id == request.AppointmentId)
             .SingleOrDefault()
             ?? throw new AppointmentNotFoundException($"appointment with id '{request.AppointmentId}' not founded. ");
+
+        var doctor = await unitOfWork.EmployeeRepository.GetByIdAsync(patientAppointmentSchedule.DoctorId);
 
         return new ScheduleAppointmentResponse
         {
@@ -29,8 +31,7 @@ public sealed class GetPatientAppointmentScheduleQueryHandler(IUnitOfWork unitOf
             TimeOfAppointment = patientAppointmentSchedule.AppointmentTime,
             DateOfAppointment = patientAppointmentSchedule.AppointmentDate,
 
-            Doctor = unitOfWork.EmployeeRepository
-            .GetByIdAsync(patientAppointmentSchedule.EmployeeId).Result.GetFullName() ?? ""
+            Doctor = doctor.FirstName ?? ""
         };
     }
 }

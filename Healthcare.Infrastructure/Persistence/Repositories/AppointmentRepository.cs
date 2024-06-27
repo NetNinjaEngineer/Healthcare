@@ -2,9 +2,7 @@
 using Healthcare.Domain.Entities;
 
 namespace Healthcare.Infrastructure.Persistence.Repositories;
-public sealed class AppointmentRepository : GenericRepository<Appointment>, IAppointmentRepository
+public sealed class AppointmentRepository(ApplicationDbContext context)
+    : GenericRepository<Appointment>(context), IAppointmentRepository
 {
-    public AppointmentRepository(ApplicationDbContext context) : base(context)
-    {
-    }
 }

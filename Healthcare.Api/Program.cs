@@ -44,12 +44,14 @@ builder.Services.AddCors();
 
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.Limits.MaxRequestBodySize = 250 * 1024 * 1024;
+    options.Limits.MaxRequestBodySize = 300 * 1024 * 1024;
 });
 
 builder.Services.Configure<FormOptions>(options =>
 {
-    options.MultipartBodyLengthLimit = 250 * 1024 * 1024;
+    options.MultipartBodyLengthLimit = int.MaxValue;
+    options.ValueLengthLimit = int.MaxValue;
+    options.MemoryBufferThreshold = int.MaxValue;
 });
 
 var app = builder.Build();

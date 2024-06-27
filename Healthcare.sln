@@ -27,8 +27,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.WebUI.Integratio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.Application", "Healthcare.Application\Healthcare.Application.csproj", "{3DF4C157-B9B2-4DFF-AF06-9D324AC19BF7}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5D66A816-6C64-44EF-AD6B-D34FDB83CECD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,10 +73,6 @@ Global
 		{3DF4C157-B9B2-4DFF-AF06-9D324AC19BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DF4C157-B9B2-4DFF-AF06-9D324AC19BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DF4C157-B9B2-4DFF-AF06-9D324AC19BF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5D66A816-6C64-44EF-AD6B-D34FDB83CECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5D66A816-6C64-44EF-AD6B-D34FDB83CECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5D66A816-6C64-44EF-AD6B-D34FDB83CECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5D66A816-6C64-44EF-AD6B-D34FDB83CECD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
