@@ -257,3 +257,7 @@ GO
 CREATE INDEX [IX_Rooms_MedicalDepartmentId] ON [Rooms] ([MedicalDepartmentId]);
 GO
 ```
+
+```markdown
+![IMG01](Images/img01.png)
+```
