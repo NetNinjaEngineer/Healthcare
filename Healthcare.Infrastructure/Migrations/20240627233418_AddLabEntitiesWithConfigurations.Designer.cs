@@ -4,6 +4,7 @@ using Healthcare.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Healthcare.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240627233418_AddLabEntitiesWithConfigurations")]
+    partial class AddLabEntitiesWithConfigurations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,33 +327,6 @@ namespace Healthcare.Infrastructure.Migrations
                     b.ToTable("PrescriptionMedications", (string)null);
                 });
 
-            modelBuilder.Entity("Healthcare.Domain.Entities.Room", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AvailabilityStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MedicalDepartmentId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoomNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RoomType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MedicalDepartmentId");
-
-                    b.ToTable("Rooms", (string)null);
-                });
-
             modelBuilder.Entity("Healthcare.Domain.Entities.Schedule", b =>
                 {
                     b.Property<string>("Id")
@@ -568,16 +544,6 @@ namespace Healthcare.Infrastructure.Migrations
                     b.Navigation("Prescription");
                 });
 
-            modelBuilder.Entity("Healthcare.Domain.Entities.Room", b =>
-                {
-                    b.HasOne("Healthcare.Domain.Entities.MedicalDepartment", "MedicalDepartment")
-                        .WithMany("Rooms")
-                        .HasForeignKey("MedicalDepartmentId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("MedicalDepartment");
-                });
-
             modelBuilder.Entity("Healthcare.Domain.Entities.Schedule", b =>
                 {
                     b.OwnsOne("Healthcare.Domain.ValueObjects.TimeSlot", "TimeSlot", b1 =>
@@ -686,8 +652,6 @@ namespace Healthcare.Infrastructure.Migrations
                     b.Navigation("Doctors");
 
                     b.Navigation("Nurses");
-
-                    b.Navigation("Rooms");
                 });
 
             modelBuilder.Entity("Healthcare.Domain.Entities.Medication", b =>

@@ -10,4 +10,5 @@ public class Appointment : BaseEntity
     public string PatientId { get; set; } = null!;
     public Doctor Doctor { get; set; } = null!;
     public Patient Patient { get; set; } = null!;
+    public ICollection<LabResult> LabResults { get; set; } = [];
 }
