@@ -258,6 +258,10 @@ CREATE INDEX [IX_Rooms_MedicalDepartmentId] ON [Rooms] ([MedicalDepartmentId]);
 GO
 ```
 
-```markdown
-![IMG01](Images/img01.png)
-```
+
+### Healthcare Diagram
+
+
+<img src="Images/img01.png" alt="" style="border-radius: 5px" />
+<img src="Images/img02.png" style="border-radius: 5px"alt="" />
+<img src="Images/img03.png" style="border-radius: 5px" alt="" />
