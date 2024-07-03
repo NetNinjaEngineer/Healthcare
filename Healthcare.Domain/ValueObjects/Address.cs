@@ -1,5 +1,4 @@
 ﻿using Healthcare.Domain.Abstractions;
-using ROP;
 using System.Text.RegularExpressions;
 
 namespace Healthcare.Domain.ValueObjects;
@@ -7,6 +6,7 @@ public class Address : IEquatable<Address>
 {
     private const int StreatDefaultLength = 100;
     private const int CityDefaultLength = 50;
+    private static List<string> _validationErrors = [];
 
     public string Street { get; }
     public string City { get; }
@@ -29,23 +29,28 @@ public class Address : IEquatable<Address>
     }
 
     public static Result<Address> Create(string streat, string city,
-        string postalCode, string state, string country) =>
-        Result<Address>.Empty()
-            .Ensure(x => !string.IsNullOrWhiteSpace(streat),
-                DomainErrors.Address.Empty)
-            .Ensure(x => streat.Length < StreatDefaultLength,
-                DomainErrors.Address.Streat.TooLong)
-            .Ensure(x => !string.IsNullOrWhiteSpace(city),
-                DomainErrors.Address.Empty)
-            .Ensure(x => city.Length < CityDefaultLength,
-                DomainErrors.Address.City.TooLong)
-            .Ensure(x => !string.IsNullOrWhiteSpace(postalCode),
-                DomainErrors.Address.Empty)
-            .Ensure(x => !Regex.IsMatch(postalCode, @"^\d{5}(-\d{4})?$"),
-                DomainErrors.Address.PostalCode.InValidFormat)
-            .Map(x => Result<Address>.Success(new Address(
-                streat, city, state, postalCode, country)));
+        string postalCode, string state, string country)
+    {
+        if (string.IsNullOrWhiteSpace(streat))
+            _validationErrors.Add("streat can not be empty.");
 
+        if (string.IsNullOrWhiteSpace(city))
+            _validationErrors.Add("city can not be empty.");
+
+        if (streat.Length > StreatDefaultLength)
+            _validationErrors.Add($"streat must have less than {StreatDefaultLength} characters.");
+
+        if (string.IsNullOrWhiteSpace(postalCode))
+            _validationErrors.Add("empty postal code or white space.");
+
+        if (!Regex.IsMatch(postalCode, @"^\d{5}(-\d{4})?$"))
+            _validationErrors.Add("Invalid postal code format.");
+
+        if (_validationErrors.Any())
+            return Result<Address>.Failure(string.Join(", ", _validationErrors));
+
+        return Result<Address>.Success(new Address(streat, city, state, postalCode, country));
+    }
 
     public override bool Equals(object? obj)
     {

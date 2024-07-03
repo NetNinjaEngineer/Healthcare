@@ -19,7 +19,7 @@ public sealed class UnitOfWork : IUnitOfWork
         DepartmentRepository ??= new DepartmentRepository(_context);
     }
 
-    public async Task CommitAsync() => await _context.SaveChangesAsync();
+    public async Task<bool> CommitAsync() => await _context.SaveChangesAsync() > 0;
 
     public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
     {

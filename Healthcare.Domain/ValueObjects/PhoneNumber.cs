@@ -15,14 +15,10 @@ public class PhoneNumber
     public static Result<PhoneNumber> Create(string number)
     {
         if (string.IsNullOrWhiteSpace(number))
-        {
             return Result<PhoneNumber>.Failure("Phone number cannot be empty.");
-        }
 
-        if (!Regex.IsMatch(number, @"^\+\d{1,3}\s\d{10}$"))
-        {
+        if (!Regex.IsMatch(number, @"^\+\d{10}"))
             return Result<PhoneNumber>.Failure("Phone number is not valid.");
-        }
 
         return Result<PhoneNumber>.Success(new PhoneNumber(number));
     }

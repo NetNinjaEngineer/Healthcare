@@ -8,6 +8,7 @@ using Healthcare.Application.DTOs.Employee;
 using Healthcare.Application.Filters;
 using Healthcare.Application.Queries.GetAllEmployees;
 using Healthcare.Application.Queries.GetEmployeeDetails;
+using Healthcare.Domain.Abstractions;
 using Healthcare.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,8 +23,13 @@ public class EmployeesController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(EmployeeForListDto), StatusCodes.Status201Created)]
     public async Task<IActionResult> CreateEmployee(EmployeeForCreateDto employee)
     {
-        var employeeCreated = await mediator.Send(new CreateEmployeeCommand { Employee = employee });
-        return CreatedAtRoute("GetEmployee", new { id = employeeCreated.Id }, employeeCreated);
+        Result<EmployeeForListDto> employeeCreatedResult =
+            await mediator.Send(new CreateEmployeeCommand { Employee = employee });
+
+        if (employeeCreatedResult.IsFailure)
+            return BadRequest(employeeCreatedResult.Error);
+
+        return CreatedAtRoute("GetEmployee", new { id = employeeCreatedResult.Value.Id }, employeeCreatedResult.Value);
     }
 
     [HttpGet]

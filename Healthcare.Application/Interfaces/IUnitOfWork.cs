@@ -8,5 +8,5 @@ public interface IUnitOfWork : IDisposable
     IAppointmentRepository AppointmentRepository { get; }
     IDepartmentRepository DepartmentRepository { get; }
     IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity;
-    Task CommitAsync();
+    Task<bool> CommitAsync();
 }

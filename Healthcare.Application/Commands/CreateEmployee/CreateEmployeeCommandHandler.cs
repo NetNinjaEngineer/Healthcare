@@ -17,13 +17,41 @@ public sealed class CreateEmployeeCommandHandler(
         CreateEmployeeCommand request,
         CancellationToken cancellationToken)
     {
-        await new CreateEmployeeCommandValidator()
-            .ValidateAndThrowAsync(request.Employee, cancellationToken);
+        await ValidateRequest(request, cancellationToken);
 
+        Result<Employee> employeeResult = ValidateAndCreateEmployee(request);
+        if (employeeResult.IsFailure)
+            return Result<EmployeeForListDto>.Failure(employeeResult.Error);
+
+        Result result = await Save(unitOfWork, employeeResult.Value);
+
+        if (result.IsFailure)
+            return Result<EmployeeForListDto>.Failure(result.Error);
+
+        return Result<EmployeeForListDto>.Success(mapper.Map<EmployeeForListDto>(employeeResult.Value));
+    }
+
+    private static async Task<Result> Save(IUnitOfWork unitOfWork, Employee employee)
+    {
+        unitOfWork.EmployeeRepository.Create(employee);
+
+        return !await unitOfWork.CommitAsync() ?
+            Result.Failure("Failed to save employee to the repository.") :
+            Result.Success();
+    }
+
+    private static async Task ValidateRequest(CreateEmployeeCommand request,
+        CancellationToken cancellationToken)
+        => await new CreateEmployeeCommandValidator().ValidateAndThrowAsync(
+            request.Employee,
+            cancellationToken);
+
+    private static Result<Employee> ValidateAndCreateEmployee(CreateEmployeeCommand request)
+    {
         Result<PhoneNumber> phoneNumberResult = PhoneNumber.Create(request.Employee.Phone!);
 
         if (phoneNumberResult.IsFailure)
-            return Result<EmployeeForListDto>.Failure(phoneNumberResult.Error);
+            return Result<Employee>.Failure(phoneNumberResult.Error);
 
         Result<Address> addressResult = Address.Create(
             request.Employee.Street!,
@@ -31,7 +59,7 @@ public sealed class CreateEmployeeCommandHandler(
             request.Employee.Country!);
 
         if (addressResult.IsFailure)
-            return Result<EmployeeForListDto>.Failure(addressResult.Error);
+            return Result<Employee>.Failure(addressResult.Error);
 
 
         Result<Employee> employeeResult = Employee.Create(
@@ -41,14 +69,8 @@ public sealed class CreateEmployeeCommandHandler(
             request.Employee.Gender, request.Employee.Email, addressResult.Value);
 
         if (employeeResult.IsFailure)
-            return Result<EmployeeForListDto>.Failure(employeeResult.Error);
+            return Result<Employee>.Failure(employeeResult.Error);
 
-        Employee employee = employeeResult.Value;
-
-        unitOfWork.EmployeeRepository.Create(employee);
-
-        await unitOfWork.CommitAsync();
-
-        return Result<EmployeeForListDto>.Success(mapper.Map<EmployeeForListDto>(employee));
+        return employeeResult;
     }
 }

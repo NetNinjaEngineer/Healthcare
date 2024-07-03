@@ -1,9 +1,9 @@
 ﻿namespace Healthcare.Domain.Abstractions;
 public class Result<T>
 {
-    public bool IsSuccess { get; private set; }
-    public T Value { get; private set; }
-    public string Error { get; private set; }
+    public bool IsSuccess { get; }
+    public T Value { get; }
+    public string Error { get; }
 
     private Result(bool isSuccess, T value, string error)
     {
@@ -43,9 +43,22 @@ public class Result<T>
 
         throw new InvalidOperationException("Cannot access error on a successful result.");
     }
+}
 
-    public static Result<T> Empty()
+public class Result
+{
+    public bool IsSuccess { get; }
+    public string Error { get; }
+    private Result(bool isSuccess, string error)
     {
-        return new Result<T>(false, default!, string.Empty);
+        IsSuccess = isSuccess;
+        Error = error;
     }
+
+    public bool IsFailure => !IsSuccess;
+
+    public static Result Success() => new(true, string.Empty);
+
+    public static Result Failure(string error) => new(false, error);
+
 }

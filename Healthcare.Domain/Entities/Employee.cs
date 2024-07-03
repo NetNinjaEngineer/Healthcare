@@ -2,7 +2,6 @@
 using Healthcare.Domain.Enumerations;
 using Healthcare.Domain.Exceptions;
 using Healthcare.Domain.ValueObjects;
-using ROP;
 
 namespace Healthcare.Domain.Entities;
 public class Employee : BaseEntity
@@ -42,19 +41,20 @@ public class Employee : BaseEntity
         AddressInformation = address;
     }
 
-    public static Result<Employee> Create(
-        string firstName, string lastName, PhoneNumber phoneNumber, string jobTitle,
-        decimal salary, DateTime dateOfBirth, DateTime hireDate,
-        Gender gender, string email, Address address) =>
-        Result<Employee>.Empty()
-        .Ensure(
-            e => !string.IsNullOrWhiteSpace(firstName),
-            "First name can not be empty.")
-        .Ensure(
-            e => !string.IsNullOrWhiteSpace(lastName),
-            "Last name can not be empty.")
-        .Map(e => Result<Employee>.Success(new Employee(firstName, lastName, phoneNumber,
-            jobTitle, salary, dateOfBirth, hireDate, gender, email, address)));
+    public static Result<Employee> Create(string firstName, string lastName,
+        PhoneNumber phoneNumber, string jobTitle, decimal salary,
+        DateTime dateOfBirth, DateTime hireDate, Gender gender, string email, Address address)
+    {
+        if (string.IsNullOrWhiteSpace(firstName))
+            return Result<Employee>.Failure("First name can not be empty.");
+
+        if (string.IsNullOrWhiteSpace(lastName))
+            return Result<Employee>.Failure("Last name can not be empty.");
+
+        return Result<Employee>.Success(new Employee(firstName, lastName, phoneNumber,
+            jobTitle, salary, dateOfBirth, hireDate, gender, email, address));
+
+    }
 
     public void UpdateContactInformation(string phoneNumber, string emailAddress,
         string street, string city, string state, string postalCode, string country)

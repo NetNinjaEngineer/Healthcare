@@ -26,6 +26,7 @@ public class MappingProfile : Profile
         CreateMap<Patient, PatientDto>();
         CreateMap<Appointment, AppointmentDto>();
         CreateMap<Employee, EmployeeDto>();
+        CreateMap<Employee, EmployeeForListDto>();
         CreateMap<MedicalDepartment, DepartmentDto>();
         CreateMap<Patient, PatientForListDto>();
     }
