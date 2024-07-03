@@ -1,7 +1,2 @@
 ﻿namespace Healthcare.Domain.Exceptions;
-public class EmptyEmployeeCollection : Exception
-{
-    public EmptyEmployeeCollection(string? message) : base(message)
-    {
-    }
-}
+public class EmptyEmployeeCollection(string? message) : Exception(message);

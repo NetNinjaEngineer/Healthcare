@@ -6,10 +6,8 @@ using Healthcare.Application.Commands.PromoteEmployee;
 using Healthcare.Application.Commands.UpdateEmployee;
 using Healthcare.Application.DTOs.Employee;
 using Healthcare.Application.Filters;
-using Healthcare.Application.Queries.EmployeeReport;
 using Healthcare.Application.Queries.GetAllEmployees;
 using Healthcare.Application.Queries.GetEmployeeDetails;
-using Healthcare.Application.Strategies.Reporting;
 using Healthcare.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -69,14 +67,14 @@ public class EmployeesController(IMediator mediator) : ControllerBase
         return NoContent();
     }
 
-    [Route("export")]
-    [HttpGet]
-    public async Task<IActionResult> Report(ExportType exportType)
-    {
-        var (fileBytes, fileMimeType, fileExtemsion) = await mediator.Send(new EmployeeReportQuery(exportType));
+    //[Route("export")]
+    //[HttpGet]
+    //public async Task<IActionResult> Report(ExportType exportType)
+    //{
+    //    var result = (await mediator.Send(new EmployeeReportQuery(exportType))).Value;
 
-        return File(fileBytes, fileMimeType, $"employees{fileExtemsion}");
-    }
+    //    return File(result.file, result.mimeType, $"employees{result.fileExtension}");
+    //}
 
     [Route("create-collection")]
     [HttpPost]

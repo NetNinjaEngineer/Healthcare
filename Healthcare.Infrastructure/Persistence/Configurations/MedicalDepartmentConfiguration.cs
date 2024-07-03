@@ -14,11 +14,6 @@ public class MedicalDepartmentConfiguration : IEntityTypeConfiguration<MedicalDe
             .HasColumnType("varchar")
             .HasMaxLength(40).IsRequired();
 
-        builder.HasMany(x => x.Doctors)
-            .WithOne(x => x.MedicalDepartment)
-            .HasForeignKey(x => x.MedicalDepartmentId)
-            .IsRequired();
-
         builder.HasMany(x => x.Nurses)
             .WithOne(x => x.MedicalDepartment)
             .HasForeignKey(x => x.MedicalDepartmentId)

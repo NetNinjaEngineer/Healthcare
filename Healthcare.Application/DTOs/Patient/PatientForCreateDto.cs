@@ -1,4 +1,4 @@
-﻿using Healthcare.Domain.ValueObjects;
+﻿using Healthcare.Domain.Enumerations;
 
 namespace Healthcare.Application.DTOs.Patient;
 

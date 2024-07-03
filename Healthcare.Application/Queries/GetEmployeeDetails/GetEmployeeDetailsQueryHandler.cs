@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Healthcare.Application.DTOs.Employee;
 using Healthcare.Application.Interfaces;
-using Healthcare.Domain;
+using Healthcare.Domain.Abstractions;
 using Healthcare.Domain.Exceptions;
 using MediatR;
 
@@ -15,14 +15,11 @@ public sealed class GetEmployeeDetailsQueryHandler(
         GetEmployeeDetailsQuery request,
         CancellationToken cancellationToken)
     {
-        if (request.EmployeeId is not null)
-        {
-            var employee = await unitOfWork.EmployeeRepository.GetByIdAsync(request.EmployeeId);
-            return employee is null
-                ? throw new EmployeeNotFoundException(ErrorMessages.EmployeeNotFound)
-                : mapper.Map<EmployeeForListDto>(employee);
-        }
+        if (request.EmployeeId is null) throw new IdParameterNullException($"{nameof(request.EmployeeId)} was null.");
+        var employee = await unitOfWork.EmployeeRepository.GetByIdAsync(request.EmployeeId);
+        return employee is null
+            ? throw new EmployeeNotFoundException(DomainErrors.Employee.EmployeeNotFound)
+            : mapper.Map<EmployeeForListDto>(employee);
 
-        throw new IdParameterNullException($"{nameof(request.EmployeeId)} was null.");
     }
 }

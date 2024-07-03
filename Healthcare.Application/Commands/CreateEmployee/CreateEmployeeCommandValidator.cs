@@ -33,11 +33,6 @@ public sealed class CreateEmployeeCommandValidator : AbstractValidator<EmployeeF
             .NotEmpty().WithMessage("Salary is required.")
             .GreaterThan(0).WithMessage("Salary must be greater than zero.");
 
-
-        RuleFor(dto => dto.Phone)
-            .NotEmpty().WithMessage("Phone number is required.")
-            .Matches(@"^\+?[0-9]{3,}$").WithMessage("Invalid phone number format.");
-
         RuleFor(dto => dto.HireDate)
             .NotEmpty().WithMessage("Hire date is required.")
             .LessThanOrEqualTo(DateTime.Now).WithMessage("Hire date cannot be in the future.");

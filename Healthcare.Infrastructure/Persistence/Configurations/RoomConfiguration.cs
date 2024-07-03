@@ -1,5 +1,5 @@
 ﻿using Healthcare.Domain.Entities;
-using Healthcare.Domain.ValueObjects;
+using Healthcare.Domain.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

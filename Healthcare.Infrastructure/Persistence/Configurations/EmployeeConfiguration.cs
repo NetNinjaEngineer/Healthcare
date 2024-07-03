@@ -1,5 +1,5 @@
 ﻿using Healthcare.Domain.Entities;
-using Healthcare.Domain.ValueObjects;
+using Healthcare.Domain.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -30,9 +30,13 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
             .HasMaxLength(50).IsRequired();
 
 
-        builder.Property(e => e.Phone)
-            .HasColumnType("varchar")
-            .HasMaxLength(20).IsRequired();
+        builder.OwnsOne(e => e.Phone, phoneBuilder =>
+        {
+            phoneBuilder.Property(p => p.Number)
+                .HasColumnType("varchar")
+                .HasMaxLength(20)
+                .IsRequired();
+        });
 
         builder.Property(e => e.HireDate)
             .HasColumnName("HireDate")
@@ -52,7 +56,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
                 g => (Gender)Enum.Parse(typeof(Gender), g)
             );
 
-        builder.OwnsOne(e => e.Address, address =>
+        builder.OwnsOne(e => e.AddressInformation, address =>
         {
             address.Property(e => e.City)
             .HasColumnName("City")

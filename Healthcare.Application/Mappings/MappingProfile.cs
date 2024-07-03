@@ -14,11 +14,11 @@ public class MappingProfile : Profile
         CreateMap<EmployeeForUpdateDto, Employee>();
         CreateMap<Employee, EmployeeForListDto>()
            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.ToString()))
-           .ForPath(dest => dest.Address.State, opt => opt.MapFrom(src => src.Address.State))
-           .ForPath(dest => dest.Address.City, opt => opt.MapFrom(src => src.Address.City))
-           .ForPath(dest => dest.Address.PostalCode, opt => opt.MapFrom(src => src.Address.PostalCode))
-           .ForPath(dest => dest.Address.Country, opt => opt.MapFrom(src => src.Address.Country))
-           .ForPath(dest => dest.Address.Street, opt => opt.MapFrom(src => src.Address.Street));
+           .ForPath(dest => dest.Address.State, opt => opt.MapFrom(src => src.AddressInformation.State))
+           .ForPath(dest => dest.Address.City, opt => opt.MapFrom(src => src.AddressInformation.City))
+           .ForPath(dest => dest.Address.PostalCode, opt => opt.MapFrom(src => src.AddressInformation.PostalCode))
+           .ForPath(dest => dest.Address.Country, opt => opt.MapFrom(src => src.AddressInformation.Country))
+           .ForPath(dest => dest.Address.Street, opt => opt.MapFrom(src => src.AddressInformation.Street));
 
 
         CreateMap<PatientForCreateDto, Patient>();

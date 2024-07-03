@@ -94,11 +94,6 @@ namespace Healthcare.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar");
-
                     b.Property<decimal>("Salary")
                         .HasColumnType("decimal(18, 2)");
 
@@ -399,7 +394,6 @@ namespace Healthcare.Infrastructure.Migrations
                     b.HasBaseType("Healthcare.Domain.Entities.Employee");
 
                     b.Property<string>("MedicalDepartmentId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasIndex("MedicalDepartmentId");
@@ -460,7 +454,7 @@ namespace Healthcare.Infrastructure.Migrations
                         .HasForeignKey("ScheduleId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.OwnsOne("Healthcare.Domain.ValueObjects.Address", "Address", b1 =>
+                    b.OwnsOne("Healthcare.Domain.ValueObjects.Address", "AddressInformation", b1 =>
                         {
                             b1.Property<string>("EmployeeId")
                                 .HasColumnType("nvarchar(450)");
@@ -503,7 +497,27 @@ namespace Healthcare.Infrastructure.Migrations
                                 .HasForeignKey("EmployeeId");
                         });
 
-                    b.Navigation("Address");
+                    b.OwnsOne("Healthcare.Domain.ValueObjects.PhoneNumber", "Phone", b1 =>
+                        {
+                            b1.Property<string>("EmployeeId")
+                                .HasColumnType("nvarchar(450)");
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasMaxLength(20)
+                                .HasColumnType("varchar");
+
+                            b1.HasKey("EmployeeId");
+
+                            b1.ToTable("Employees");
+
+                            b1.WithOwner()
+                                .HasForeignKey("EmployeeId");
+                        });
+
+                    b.Navigation("AddressInformation");
+
+                    b.Navigation("Phone");
 
                     b.Navigation("Schedule");
                 });
@@ -625,8 +639,8 @@ namespace Healthcare.Infrastructure.Migrations
                     b.HasOne("Healthcare.Domain.Entities.MedicalDepartment", "MedicalDepartment")
                         .WithMany("Doctors")
                         .HasForeignKey("MedicalDepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("FK_Doctors_MedicalDepartments_MedicalDepartmentId");
 
                     b.Navigation("MedicalDepartment");
                 });

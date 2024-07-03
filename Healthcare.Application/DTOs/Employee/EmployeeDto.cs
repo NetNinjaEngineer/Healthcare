@@ -1,7 +1,7 @@
 ﻿using Healthcare.Application.DTOs.Appointment;
 using Healthcare.Application.DTOs.Common;
 using Healthcare.Application.DTOs.Department;
-using Healthcare.Domain.ValueObjects;
+using Healthcare.Domain.Enumerations;
 
 namespace Healthcare.Application.DTOs.Employee;
 public class EmployeeDto : BaseEntityDto
