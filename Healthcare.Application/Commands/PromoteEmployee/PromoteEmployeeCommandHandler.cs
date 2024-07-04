@@ -1,5 +1,4 @@
 ﻿using Healthcare.Application.Interfaces;
-using Healthcare.Domain.Abstractions;
 using Healthcare.Domain.Exceptions;
 using MediatR;
 
@@ -25,7 +24,7 @@ public sealed class PromoteEmployeeCommandHandler
             throw new IdParameterNullException($"{request.EmployeeId} is null.");
         var employee = await _unitOfWork.EmployeeRepository
             .GetByIdAsync(request.EmployeeId)
-            ?? throw new EmployeeNotFoundException(DomainErrors.Employee.EmployeeNotFound);
+            ?? throw new EmployeeNotFoundException("employee not founded.");
         if (request.PromoteEmployeeModel is not null)
             employee.PromoteEmployee(request.PromoteEmployeeModel.SalaryIncrease);
         _unitOfWork.EmployeeRepository.Update(employee);

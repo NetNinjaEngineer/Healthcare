@@ -23,21 +23,25 @@ public sealed class CreateEmployeeCommandHandler(
         if (employeeResult.IsFailure)
             return Result<EmployeeForListDto>.Failure(employeeResult.Error);
 
-        Result result = await Save(unitOfWork, employeeResult.Value);
+        Result<bool> result = await Save(unitOfWork, employeeResult.Value);
 
-        if (result.IsFailure)
-            return Result<EmployeeForListDto>.Failure(result.Error);
-
-        return Result<EmployeeForListDto>.Success(mapper.Map<EmployeeForListDto>(employeeResult.Value));
+        return result.IsFailure ?
+            Result<EmployeeForListDto>.Failure(result.Error) :
+            Result<EmployeeForListDto>.Success(mapper.Map<EmployeeForListDto>(employeeResult.Value));
     }
 
-    private static async Task<Result> Save(IUnitOfWork unitOfWork, Employee employee)
+    private static async Task<Result<bool>> Save(IUnitOfWork unitOfWork, Employee employee)
     {
-        unitOfWork.EmployeeRepository.Create(employee);
-
-        return !await unitOfWork.CommitAsync() ?
-            Result.Failure("Failed to save employee to the repository.") :
-            Result.Success();
+        try
+        {
+            unitOfWork.EmployeeRepository.Create(employee);
+            await unitOfWork.CommitAsync();
+            return Result<bool>.Success(true);
+        }
+        catch (Exception ex)
+        {
+            return Result<bool>.Failure(new Error("DB", $"Database error occured - {ex.Message}"));
+        }
     }
 
     private static async Task ValidateRequest(CreateEmployeeCommand request,
@@ -46,31 +50,65 @@ public sealed class CreateEmployeeCommandHandler(
             request.Employee,
             cancellationToken);
 
-    private static Result<Employee> ValidateAndCreateEmployee(CreateEmployeeCommand request)
+    private static Result<Employee> ValidateAndCreateEmployee(CreateEmployeeCommand command)
     {
-        Result<PhoneNumber> phoneNumberResult = PhoneNumber.Create(request.Employee.Phone!);
+        var result = CreatePhoneNumber(command.Employee.Phone!)
+            .Then(phone => CreateAddress(
+                command.Employee.Street!,
+                command.Employee.City!,
+                command.Employee.PostalCode!,
+                command.Employee.State!,
+                command.Employee.Country!))
+            .Then(address => CreateEmployee(command));
+
+
+        if (result.IsSuccess)
+            return result;
+
+        return Result<Employee>.Failure(result.Error);
+    }
+
+    private static Result<PhoneNumber> CreatePhoneNumber(string phoneNumber)
+    {
+        Result<PhoneNumber> phoneNumberResult = PhoneNumber.Create(phoneNumber);
 
         if (phoneNumberResult.IsFailure)
-            return Result<Employee>.Failure(phoneNumberResult.Error);
+            return Result<PhoneNumber>.Failure(phoneNumberResult.Error);
 
-        Result<Address> addressResult = Address.Create(
-            request.Employee.Street!,
-            request.Employee.City!, request.Employee.PostalCode!, request.Employee.State!,
-            request.Employee.Country!);
+        return phoneNumberResult;
+    }
 
+    private static Result<Address> CreateAddress(string streat, string city, string postalCode, string state, string country)
+    {
+        Result<Address> addressResult = Address.Create(streat, city, postalCode, state, country);
         if (addressResult.IsFailure)
-            return Result<Employee>.Failure(addressResult.Error);
+            return Result<Address>.Failure(addressResult.Error);
+        return addressResult;
+    }
 
-
+    private static Result<Employee> CreateEmployee(CreateEmployeeCommand command)
+    {
         Result<Employee> employeeResult = Employee.Create(
-            request.Employee.FirstName, request.Employee.LastName,
-            phoneNumberResult.Value, request.Employee.JobTitle,
-            request.Employee.Salary, request.Employee.DateOfBirth, request.Employee.HireDate,
-            request.Employee.Gender, request.Employee.Email, addressResult.Value);
+            command.Employee.FirstName,
+            command.Employee.LastName,
+            PhoneNumber.Create(command.Employee.Phone!).Value,
+            command.Employee.JobTitle,
+            command.Employee.Salary,
+            command.Employee.DateOfBirth,
+            command.Employee.HireDate,
+            command.Employee.Gender,
+            command.Employee.Email,
+            Address.Create(
+                command.Employee.Street!,
+                command.Employee.City!,
+                command.Employee.PostalCode!,
+                command.Employee.State!,
+                command.Employee.Country!
+                ).Value
+            );
 
-        if (employeeResult.IsFailure)
-            return Result<Employee>.Failure(employeeResult.Error);
+        return employeeResult.IsFailure
+            ? Result<Employee>.Failure(employeeResult.Error) : employeeResult;
 
-        return employeeResult;
     }
 }

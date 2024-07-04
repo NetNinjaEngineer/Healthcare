@@ -46,10 +46,10 @@ public class Employee : BaseEntity
         DateTime dateOfBirth, DateTime hireDate, Gender gender, string email, Address address)
     {
         if (string.IsNullOrWhiteSpace(firstName))
-            return Result<Employee>.Failure("First name can not be empty.");
+            return Result<Employee>.Failure(DomainErrors.Employee.EmptyFirstName);
 
         if (string.IsNullOrWhiteSpace(lastName))
-            return Result<Employee>.Failure("Last name can not be empty.");
+            return Result<Employee>.Failure(DomainErrors.Employee.EmptyLastName);
 
         return Result<Employee>.Success(new Employee(firstName, lastName, phoneNumber,
             jobTitle, salary, dateOfBirth, hireDate, gender, email, address));
@@ -62,11 +62,11 @@ public class Employee : BaseEntity
         Result<PhoneNumber> phoneResult = PhoneNumber.Create(phoneNumber);
 
         if (!phoneResult.IsSuccess)
-            throw new InvalidOperationException(phoneResult.Error);
+            throw new InvalidOperationException(phoneResult.Error.Description);
 
         Result<Address> addressResult = Address.Create(street, city, postalCode, state, country);
         if (!addressResult.IsSuccess)
-            throw new InvalidOperationException(addressResult.Error);
+            throw new InvalidOperationException(addressResult.Error.Description);
 
         Phone = phoneResult.Value;
         AddressInformation = addressResult.Value;
@@ -87,7 +87,7 @@ public class Employee : BaseEntity
     public void PromoteEmployee(decimal salaryIncrease)
     {
         if (salaryIncrease < 0)
-            throw new SalaryIncreaseException(DomainErrors.Employee.SalaryIncreaseLessThanZero);
+            throw new SalaryIncreaseException("salary must not be less than 0.");
 
         Salary += salaryIncrease;
 

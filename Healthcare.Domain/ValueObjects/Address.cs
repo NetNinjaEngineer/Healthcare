@@ -6,7 +6,6 @@ public class Address : IEquatable<Address>
 {
     private const int StreatDefaultLength = 100;
     private const int CityDefaultLength = 50;
-    private static List<string> _validationErrors = [];
 
     public string Street { get; }
     public string City { get; }
@@ -32,22 +31,19 @@ public class Address : IEquatable<Address>
         string postalCode, string state, string country)
     {
         if (string.IsNullOrWhiteSpace(streat))
-            _validationErrors.Add("streat can not be empty.");
+            return Result<Address>.Failure(DomainErrors.Address.EmptyStreat);
 
         if (string.IsNullOrWhiteSpace(city))
-            _validationErrors.Add("city can not be empty.");
+            return Result<Address>.Failure(DomainErrors.Address.EmptyCity);
 
         if (streat.Length > StreatDefaultLength)
-            _validationErrors.Add($"streat must have less than {StreatDefaultLength} characters.");
+            return Result<Address>.Failure(DomainErrors.Address.ViolateStreatLength);
 
         if (string.IsNullOrWhiteSpace(postalCode))
-            _validationErrors.Add("empty postal code or white space.");
+            return Result<Address>.Failure(DomainErrors.Address.EmptyPostalCode);
 
         if (!Regex.IsMatch(postalCode, @"^\d{5}(-\d{4})?$"))
-            _validationErrors.Add("Invalid postal code format.");
-
-        if (_validationErrors.Any())
-            return Result<Address>.Failure(string.Join(", ", _validationErrors));
+            return Result<Address>.Failure(DomainErrors.Address.InvalidPostalCode);
 
         return Result<Address>.Success(new Address(streat, city, state, postalCode, country));
     }

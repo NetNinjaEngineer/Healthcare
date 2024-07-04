@@ -23,7 +23,7 @@ public class GlobalExceptionHandingMiddleware(RequestDelegate next)
     {
         context.Response.ContentType = "application/json";
         var statusCode = HttpStatusCode.InternalServerError;
-        JsonErrorResponse? jsonErrorResponse = null;
+        JsonErrorResponse? jsonErrorResponse;
 
         switch (exception)
         {
@@ -57,8 +57,9 @@ public class GlobalExceptionHandingMiddleware(RequestDelegate next)
 
     internal class JsonErrorResponse(string? errorMessage, int statusCode, List<string>? validationErrors)
     {
-        public string? ErrorMessage { get; private set; } = errorMessage;
-        public int StatusCode { get; private set; } = statusCode;
-        public List<string>? ValidationErrors { get; private set; } = validationErrors;
+        public string? ErrorMessage { get; } = errorMessage;
+        public int StatusCode { get; } = statusCode;
+        public List<string>? ValidationErrors { get; } = validationErrors;
+
     }
 }

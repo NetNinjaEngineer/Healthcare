@@ -3,9 +3,9 @@ public class Result<T>
 {
     public bool IsSuccess { get; }
     public T Value { get; }
-    public string Error { get; }
+    public Error Error { get; }
 
-    private Result(bool isSuccess, T value, string error)
+    private Result(bool isSuccess, T value, Error error)
     {
         IsSuccess = isSuccess;
         Value = value;
@@ -14,10 +14,10 @@ public class Result<T>
 
     public static Result<T> Success(T value)
     {
-        return new Result<T>(true, value, string.Empty);
+        return new Result<T>(true, value, Error.None);
     }
 
-    public static Result<T> Failure(string error)
+    public static Result<T> Failure(Error error)
     {
         return new Result<T>(false, default!, error);
     }
@@ -34,7 +34,7 @@ public class Result<T>
         throw new InvalidOperationException("Cannot access value on a failed result.");
     }
 
-    public string GetError()
+    public Error GetError()
     {
         if (IsFailure)
         {
@@ -43,22 +43,27 @@ public class Result<T>
 
         throw new InvalidOperationException("Cannot access error on a successful result.");
     }
-}
 
-public class Result
-{
-    public bool IsSuccess { get; }
-    public string Error { get; }
-    private Result(bool isSuccess, string error)
+    public Result<TOut> Then<TOut>(Func<T, Result<TOut>> continuation)
     {
-        IsSuccess = isSuccess;
-        Error = error;
+
+        if (!IsSuccess)
+            return new Result<TOut>(false, default!, Error);
+
+        return continuation(Value);
+
     }
 
-    public bool IsFailure => !IsSuccess;
+    public Result<U> Map<U>(Func<T, U> selector)
+    {
+        if (!IsSuccess)
+        {
+            return new Result<U>(false, default!, Error);
+        }
 
-    public static Result Success() => new(true, string.Empty);
+        return Result<U>.Success(selector(Value));
+    }
 
-    public static Result Failure(string error) => new(false, error);
+
 
 }

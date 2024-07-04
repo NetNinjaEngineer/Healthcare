@@ -27,7 +27,7 @@ public class EmployeesController(IMediator mediator) : ControllerBase
             await mediator.Send(new CreateEmployeeCommand { Employee = employee });
 
         if (employeeCreatedResult.IsFailure)
-            return BadRequest(employeeCreatedResult.Error);
+            return BadRequest(employeeCreatedResult.Error.ToString());
 
         return CreatedAtRoute("GetEmployee", new { id = employeeCreatedResult.Value.Id }, employeeCreatedResult.Value);
     }

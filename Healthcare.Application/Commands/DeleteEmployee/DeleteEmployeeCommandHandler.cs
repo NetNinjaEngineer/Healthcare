@@ -1,5 +1,4 @@
 ﻿using Healthcare.Application.Interfaces;
-using Healthcare.Domain.Abstractions;
 using Healthcare.Domain.Exceptions;
 using MediatR;
 
@@ -15,7 +14,7 @@ public sealed class DeleteEmployeeCommandHandler(
         if (request.Id is null)
             throw new IdParameterNullException($"{nameof(request.Id)} is null.");
         var employee = await unitOfWork.EmployeeRepository.GetByIdAsync(request.Id)
-            ?? throw new EmployeeNotFoundException(DomainErrors.Employee.EmployeeNotFound);
+            ?? throw new EmployeeNotFoundException("employee not founded.");
         unitOfWork.EmployeeRepository.Delete(employee);
         await unitOfWork.CommitAsync();
         return Unit.Value;
