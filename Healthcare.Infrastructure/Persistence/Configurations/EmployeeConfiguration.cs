@@ -10,9 +10,6 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
     {
         builder.HasKey(e => e.Id);
 
-        builder.Property(e => e.Id)
-            .ValueGeneratedOnAdd();
-
         builder.Property(e => e.FirstName)
             .HasColumnType("varchar")
             .HasMaxLength(50).IsRequired();
@@ -34,6 +31,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         {
             phoneBuilder.Property(p => p.Number)
                 .HasColumnType("varchar")
+                .HasColumnName("Phone")
                 .HasMaxLength(20)
                 .IsRequired();
         });

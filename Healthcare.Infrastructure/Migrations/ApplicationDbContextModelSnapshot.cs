@@ -25,7 +25,6 @@ namespace Healthcare.Infrastructure.Migrations
             modelBuilder.Entity("Healthcare.Domain.Entities.Appointment", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateOnly>("DateOfAppointment")
@@ -60,7 +59,6 @@ namespace Healthcare.Infrastructure.Migrations
             modelBuilder.Entity("Healthcare.Domain.Entities.Employee", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -112,7 +110,6 @@ namespace Healthcare.Infrastructure.Migrations
             modelBuilder.Entity("Healthcare.Domain.Entities.Lab", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LabName")
@@ -163,7 +160,6 @@ namespace Healthcare.Infrastructure.Migrations
             modelBuilder.Entity("Healthcare.Domain.Entities.LabTest", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LabId")
@@ -190,7 +186,6 @@ namespace Healthcare.Infrastructure.Migrations
             modelBuilder.Entity("Healthcare.Domain.Entities.MedicalDepartment", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
@@ -206,7 +201,6 @@ namespace Healthcare.Infrastructure.Migrations
             modelBuilder.Entity("Healthcare.Domain.Entities.Medication", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
@@ -234,7 +228,6 @@ namespace Healthcare.Infrastructure.Migrations
             modelBuilder.Entity("Healthcare.Domain.Entities.Patient", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
@@ -269,7 +262,6 @@ namespace Healthcare.Infrastructure.Migrations
             modelBuilder.Entity("Healthcare.Domain.Entities.Prescription", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AppointmentId")
@@ -289,7 +281,6 @@ namespace Healthcare.Infrastructure.Migrations
             modelBuilder.Entity("Healthcare.Domain.Entities.PrescriptionMedication", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Dosage")
@@ -322,7 +313,6 @@ namespace Healthcare.Infrastructure.Migrations
             modelBuilder.Entity("Healthcare.Domain.Entities.Room", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AvailabilityStatus")
@@ -349,7 +339,6 @@ namespace Healthcare.Infrastructure.Migrations
             modelBuilder.Entity("Healthcare.Domain.Entities.Schedule", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("FRI")
@@ -505,7 +494,8 @@ namespace Healthcare.Infrastructure.Migrations
                             b1.Property<string>("Number")
                                 .IsRequired()
                                 .HasMaxLength(20)
-                                .HasColumnType("varchar");
+                                .HasColumnType("varchar")
+                                .HasColumnName("Phone");
 
                             b1.HasKey("EmployeeId");
 

@@ -19,6 +19,7 @@ public sealed class ApplicationDbContext(DbContextOptions options) : DbContext(o
     public DbSet<LabTest> LabTests { get; set; }
     public DbSet<Lab> Labs { get; set; }
     public DbSet<LabResult> LabResults { get; set; }
+    public DbSet<Schedule> Schedules { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

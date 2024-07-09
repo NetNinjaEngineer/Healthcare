@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
 using Healthcare.Application.DTOs.Employee;
 using Healthcare.Application.Interfaces;
+using Healthcare.Domain.Specifications;
 using MediatR;
 
 namespace Healthcare.Application.Queries.GetAllEmployees;
 public sealed class GetAllEmployeesQueryHandler(
-    IUnitOfWork unitOfWork,
-    IMapper mapper
-    ) : IRequestHandler<GetAllEmployeesQuery, IEnumerable<EmployeeForListDto>>
+    IMapper mapper,
+    IUnitOfWork unitOfWork)
+    : IRequestHandler<GetAllEmployeesQuery, IEnumerable<EmployeeDto>>
 {
-    public async Task<IEnumerable<EmployeeForListDto>> Handle(
-        GetAllEmployeesQuery request,
-        CancellationToken cancellationToken)
+    public async Task<IEnumerable<EmployeeDto>> Handle(
+        GetAllEmployeesQuery request, CancellationToken cancellationToken)
     {
-        var employees = mapper.Map<IEnumerable<EmployeeForListDto>>(
-            await unitOfWork.EmployeeRepository.GetAllAsync());
-        return employees;
+        var spec = new GetAllEmployeesWithScheduleSpecification();
+        var employees = await unitOfWork.EmployeeRepository.GetAllWithSpecificationAsync(spec);
+        return mapper.Map<IEnumerable<EmployeeDto>>(employees);
     }
 }

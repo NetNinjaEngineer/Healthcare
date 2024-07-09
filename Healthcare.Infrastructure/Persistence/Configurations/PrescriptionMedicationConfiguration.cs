@@ -9,7 +9,6 @@ public class PrescriptionMedicationConfiguration : IEntityTypeConfiguration<Pres
     public void Configure(EntityTypeBuilder<PrescriptionMedication> builder)
     {
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
         builder.Property(x => x.Dosage)
             .HasColumnType("varchar")
             .HasMaxLength(15)

@@ -1,13 +1,10 @@
 ﻿using Healthcare.Application.DTOs.Common;
-using Healthcare.Application.DTOs.Employee;
 
 namespace Healthcare.Application.DTOs.Appointment;
-public class AppointmentDto : BaseEntityDto
+public class AppointmentDto : BaseDto
 {
-    public string EmployeeId { get; set; } = string.Empty;
-    public EmployeeDto Employee { get; set; }
+    public string? EmployeeId { get; set; }
     public DateTime AppointmentDate { get; set; }
     public DateTime AppointmentTime { get; set; }
-    public string PatientId { get; set; } = string.Empty;
-
+    public string? PatientId { get; set; }
 }

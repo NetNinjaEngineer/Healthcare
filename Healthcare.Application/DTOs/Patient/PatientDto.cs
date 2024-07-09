@@ -1,14 +1,11 @@
-﻿using Healthcare.Application.DTOs.Appointment;
-using Healthcare.Application.DTOs.Common;
-using Healthcare.Domain.Enumerations;
+﻿using Healthcare.Application.DTOs.Common;
 
 namespace Healthcare.Application.DTOs.Patient;
-public class PatientDto : BaseEntityDto
+public class PatientDto : BaseDto
 {
-    public string FirstName { get; set; } = string.Empty;
-    public string LastName { get; set; } = string.Empty;
-    public string Phone { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
-    public Gender Gender { get; set; }
-    public ICollection<AppointmentDto> Appointments { get; set; } = [];
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public string? Phone { get; set; }
+    public string? Email { get; set; }
+    public string? Gender { get; set; }
 }

@@ -2,7 +2,7 @@
 using MediatR;
 
 namespace Healthcare.Application.Queries.GetEmployeeDetails;
-public sealed class GetEmployeeDetailsQuery : IRequest<EmployeeForListDto>
+public sealed class GetEmployeeDetailsQuery : IRequest<EmployeeDto>
 {
     public string? EmployeeId { get; private set; }
 

@@ -1,4 +1,2 @@
 ﻿namespace Healthcare.Application.DTOs.Employee;
-public sealed class EmployeeForUpdateDto : EmployeeForManipulateDto
-{
-}
+public sealed class EmployeeForUpdateDto : EmployeeForManipulateDto;

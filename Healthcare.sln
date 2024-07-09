@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9581F254-B239-493D-838C-3D0DE7F491E3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F79CA88A-F502-4ACE-B220-076486859327}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F79CA88A-F502-4ACE-B220-076486859327}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare.Domain", "Healthcare.Domain\Healthcare.Domain.csproj", "{DD3C426E-F699-4F05-91F8-7758CB732EE7}"
 EndProject

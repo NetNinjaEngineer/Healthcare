@@ -8,7 +8,6 @@ public class MedicalDepartmentConfiguration : IEntityTypeConfiguration<MedicalDe
     public void Configure(EntityTypeBuilder<MedicalDepartment> builder)
     {
         builder.HasKey(d => d.Id);
-        builder.Property(d => d.Id).ValueGeneratedOnAdd();
 
         builder.Property(p => p.Name)
             .HasColumnType("varchar")

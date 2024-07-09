@@ -8,9 +8,9 @@ namespace Healthcare.Application.Queries.GetEmployeeDetails;
 public sealed class GetEmployeeDetailsQueryHandler(
     IUnitOfWork unitOfWork,
     IMapper mapper
-    ) : IRequestHandler<GetEmployeeDetailsQuery, EmployeeForListDto>
+    ) : IRequestHandler<GetEmployeeDetailsQuery, EmployeeDto>
 {
-    public async Task<EmployeeForListDto> Handle(
+    public async Task<EmployeeDto> Handle(
         GetEmployeeDetailsQuery request,
         CancellationToken cancellationToken)
     {
@@ -18,7 +18,7 @@ public sealed class GetEmployeeDetailsQueryHandler(
         var employee = await unitOfWork.EmployeeRepository.GetByIdAsync(request.EmployeeId);
         return employee is null
             ? throw new EmployeeNotFoundException("employee not founded.")
-            : mapper.Map<EmployeeForListDto>(employee);
+            : mapper.Map<EmployeeDto>(employee);
 
     }
 }

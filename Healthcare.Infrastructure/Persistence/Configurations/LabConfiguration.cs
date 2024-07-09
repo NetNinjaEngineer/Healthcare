@@ -8,7 +8,6 @@ public class LabConfiguration : IEntityTypeConfiguration<Lab>
     public void Configure(EntityTypeBuilder<Lab> builder)
     {
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
         builder.Property(x => x.LabName)
             .HasMaxLength(100).IsRequired();
         builder.Property(x => x.Location)

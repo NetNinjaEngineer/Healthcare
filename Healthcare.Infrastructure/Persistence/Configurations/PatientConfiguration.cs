@@ -12,9 +12,6 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
 
         builder.HasKey(e => e.Id);
 
-        builder.Property(e => e.Id)
-            .ValueGeneratedOnAdd();
-
         builder.Property(e => e.FirstName)
             .HasColumnType("varchar").HasMaxLength(50)
             .IsRequired();

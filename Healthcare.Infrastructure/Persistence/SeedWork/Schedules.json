@@ -1,0 +1,77 @@
+[
+  {
+    "Id": "A3AADAD9-27E7-42E4-A553-53E3EE686D64",
+    "Title": "Daily",
+    "TimeSlot": {
+      "StartTime": "09:00:00",
+      "EndTime": "12:00:00"
+    },
+    "SUN": true,
+    "MON": true,
+    "TUE": true,
+    "WED": true,
+    "THU": true,
+    "FRI": false,
+    "SAT": false
+  },
+  {
+    "Id": "41F81DE2-BCB6-4C00-8B78-D02BB10488A6",
+    "Title": "DayAfterDay",
+    "TimeSlot": {
+      "StartTime": "13:00:00",
+      "EndTime": "16:00:00"
+    },
+    "SUN": false,
+    "MON": true,
+    "TUE": false,
+    "WED": true,
+    "THU": false,
+    "FRI": true,
+    "SAT": false
+  },
+  {
+    "Id": "868BC72B-0E51-4A6A-B1A4-57F43C04C1E2",
+    "Title": "TwiceAWeek",
+    "TimeSlot": {
+      "StartTime": "17:00:00",
+      "EndTime": "20:00:00"
+    },
+    "SUN": false,
+    "MON": true,
+    "TUE": false,
+    "WED": true,
+    "THU": false,
+    "FRI": false,
+    "SAT": false
+  },
+  {
+    "Id": "B313AFB7-DE85-4255-8187-92DD5D5F2BCB",
+    "Title": "Weekend",
+    "TimeSlot": {
+      "StartTime": "10:00:00",
+      "EndTime": "14:00:00"
+    },
+    "SUN": false,
+    "MON": false,
+    "TUE": false,
+    "WED": false,
+    "THU": false,
+    "FRI": true,
+    "SAT": true
+  },
+  {
+    "Id": "CFE1D7A5-07C2-429A-8AF7-3C65F0427CCB",
+    "Title": "Compact",
+    "TimeSlot": {
+      "StartTime": "08:00:00",
+      "EndTime": "20:00:00"
+    },
+    "SUN": true,
+    "MON": true,
+    "TUE": true,
+    "WED": true,
+    "THU": true,
+    "FRI": true,
+    "SAT": true
+  }
+]

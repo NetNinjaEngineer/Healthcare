@@ -1,0 +1,275 @@
+[
+  {
+    "Id": "2DE68431-0340-4558-85FE-ABC6B98FDE7A",
+    "FirstName": "John",
+    "LastName": "Doe",
+    "Phone": {
+      "Number": "123-456-7890"
+    },
+    "JobTitle": "Doctor",
+    "Salary": 100000,
+    "DateOfBirth": "1980-05-15T00:00:00",
+    "HireDate": "2015-03-20T00:00:00",
+    "Gender": 0,
+    "Email": "john.doe@example.com",
+    "AddressInformation": {
+      "Street": "123 Main St",
+      "City": "Anytown",
+      "State": "CA",
+      "PostalCode": "90210",
+      "Country": "USA"
+    }
+  },
+  {
+    "Id": "619D1E94-EBCB-4737-BA95-5DCA2EB7B21E",
+    "FirstName": "Jane",
+    "LastName": "Smith",
+    "Phone": {
+      "Number": "456-789-0123"
+    },
+    "JobTitle": "Nurse",
+    "Salary": 60000,
+    "DateOfBirth": "1985-08-25T00:00:00",
+    "HireDate": "2018-01-10T00:00:00",
+    "Gender": 1,
+    "Email": "jane.smith@example.com",
+    "AddressInformation": {
+      "Street": "456 Elm St",
+      "City": "Smallville",
+      "State": "NY",
+      "PostalCode": "10001",
+      "Country": "USA"
+    }
+  },
+  {
+    "Id": "C044FDB0-337A-4CEE-9BDE-FC66F954906A",
+    "FirstName": "Michael",
+    "LastName": "Johnson",
+    "Phone": {
+      "Number": "789-012-3456"
+    },
+    "JobTitle": "Surgeon",
+    "Salary": 120000,
+    "DateOfBirth": "1975-11-10T00:00:00",
+    "HireDate": "2010-09-05T00:00:00",
+    "Gender": 0,
+    "Email": "michael.johnson@example.com",
+    "AddressInformation": {
+      "Street": "789 Oak St",
+      "City": "Metroville",
+      "State": "TX",
+      "PostalCode": "78701",
+      "Country": "USA"
+    }
+  },
+  {
+    "Id": "99BAEE65-F10B-4132-974F-76A3C7F2009D",
+    "FirstName": "Emily",
+    "LastName": "Brown",
+    "Phone": {
+      "Number": "234-567-8901"
+    },
+    "JobTitle": "Pediatrician",
+    "Salary": 95000,
+    "DateOfBirth": "1982-04-20T00:00:00",
+    "HireDate": "2016-07-15T00:00:00",
+    "Gender": 1,
+    "Email": "emily.brown@example.com",
+    "AddressInformation": {
+      "Street": "567 Pine St",
+      "City": "Harbor City",
+      "State": "FL",
+      "PostalCode": "33101",
+      "Country": "USA"
+    }
+  },
+  {
+    "Id": "7F632E5D-8FA6-4E26-A70B-CAF525F7658B",
+    "FirstName": "David",
+    "LastName": "Williams",
+    "Phone": {
+      "Number": "567-890-1234"
+    },
+    "JobTitle": "Anesthesiologist",
+    "Salary": 110000,
+    "DateOfBirth": "1978-09-30T00:00:00",
+    "HireDate": "2008-12-03T00:00:00",
+    "Gender": 0,
+    "Email": "david.williams@example.com",
+    "AddressInformation": {
+      "Street": "890 Cedar St",
+      "City": "Lakeside",
+      "State": "CA",
+      "PostalCode": "92040",
+      "Country": "USA"
+    }
+  },
+  {
+    "Id": "ABF4EAFD-F04C-4699-B2EF-24365AEFAFF3",
+    "FirstName": "Sarah",
+    "LastName": "Anderson",
+    "Phone": {
+      "Number": "890-123-4567"
+    },
+    "JobTitle": "Registered Nurse",
+    "Salary": 70000,
+    "DateOfBirth": "1987-06-12T00:00:00",
+    "HireDate": "2019-02-28T00:00:00",
+    "Gender": 1,
+    "Email": "sarah.anderson@example.com",
+    "AddressInformation": {
+      "Street": "234 Walnut St",
+      "City": "Riverside",
+      "State": "CA",
+      "PostalCode": "92501",
+      "Country": "USA"
+    }
+  },
+  {
+    "Id": "A57DB79D-160D-40E5-A02E-B7F7C9089828",
+    "FirstName": "Christopher",
+    "LastName": "Jones",
+    "Phone": {
+      "Number": "321-654-9870"
+    },
+    "JobTitle": "General Practitioner",
+    "Salary": 85000,
+    "DateOfBirth": "1983-01-05T00:00:00",
+    "HireDate": "2014-05-20T00:00:00",
+    "Gender": 0,
+    "Email": "christopher.jones@example.com",
+    "AddressInformation": {
+      "Street": "678 Maple St",
+      "City": "Springfield",
+      "State": "IL",
+      "PostalCode": "62701",
+      "Country": "USA"
+    }
+  },
+  {
+    "Id": "87246DFC-DE72-40C0-A844-CC835378FFCB",
+    "FirstName": "Amanda",
+    "LastName": "Martinez",
+    "Phone": {
+      "Number": "654-987-0123"
+    },
+    "JobTitle": "Physician Assistant",
+    "Salary": 75000,
+    "DateOfBirth": "1986-12-18T00:00:00",
+    "HireDate": "2017-09-10T00:00:00",
+    "Gender": 1,
+    "Email": "amanda.martinez@example.com",
+    "AddressInformation": {
+      "Street": "901 Oakwood St",
+      "City": "Lakeview",
+      "State": "CO",
+      "PostalCode": "80201",
+      "Country": "USA"
+    }
+  },
+  {
+    "Id": "AA5E7CC2-1379-48CD-9981-84733EC9EAD7",
+    "FirstName": "Matthew",
+    "LastName": "Taylor",
+    "Phone": {
+      "Number": "987-012-3456"
+    },
+    "JobTitle": "Orthopedic Surgeon",
+    "Salary": 125000,
+    "DateOfBirth": "1976-03-25T00:00:00",
+    "HireDate": "2011-11-15T00:00:00",
+    "Gender": 0,
+    "Email": "matthew.taylor@example.com",
+    "AddressInformation": {
+      "Street": "345 Oak St",
+      "City": "Greenville",
+      "State": "SC",
+      "PostalCode": "29601",
+      "Country": "USA"
+    }
+  },
+  {
+    "Id": "39A3E593-5B34-4A8A-9B05-7F7824A88C2E",
+    "FirstName": "Jessica",
+    "LastName": "Hernandez",
+    "Phone": {
+      "Number": "123-456-7890"
+    },
+    "JobTitle": "Dermatologist",
+    "Salary": 105000,
+    "DateOfBirth": "1984-07-08T00:00:00",
+    "HireDate": "2013-04-30T00:00:00",
+    "Gender": 1,
+    "Email": "jessica.hernandez@example.com",
+    "AddressInformation": {
+      "Street": "567 Pine St",
+      "City": "Harbor City",
+      "State": "FL",
+      "PostalCode": "33101",
+      "Country": "USA"
+    }
+  },
+  {
+    "Id": "472DC22F-C358-498F-853B-318B3BBBB362",
+    "FirstName": "Daniel",
+    "LastName": "Garcia",
+    "Phone": {
+      "Number": "456-789-0123"
+    },
+    "JobTitle": "Cardiologist",
+    "Salary": 115000,
+    "DateOfBirth": "1977-02-14T00:00:00",
+    "HireDate": "2009-08-20T00:00:00",
+    "Gender": 0,
+    "Email": "daniel.garcia@example.com",
+    "AddressInformation": {
+      "Street": "789 Cedar St",
+      "City": "Lakeside",
+      "State": "CA",
+      "PostalCode": "92040",
+      "Country": "USA"
+    }
+  },
+  {
+    "Id": "2AC164AE-CB7B-4530-BBBD-16A9816FB400",
+    "FirstName": "Ashley",
+    "LastName": "Young",
+    "Phone": {
+      "Number": "789-012-3456"
+    },
+    "JobTitle": "Obstetrician",
+    "Salary": 100000,
+    "DateOfBirth": "1989-10-03T00:00:00",
+    "HireDate": "2020-03-05T00:00:00",
+    "Gender": 1,
+    "Email": "ashley.young@example.com",
+    "AddressInformation": {
+      "Street": "890 Maple St",
+      "City": "Oakville",
+      "State": "WA",
+      "PostalCode": "98001",
+      "Country": "USA"
+    }
+  },
+  {
+    "Id": "501DB240-7BA6-470A-B457-786E19A60C9D",
+    "FirstName": "Ryan",
+    "LastName": "Scott",
+    "Phone": {
+      "Number": "234-567-8901"
+    },
+    "JobTitle": "Psychiatrist",
+    "Salary": 90000,
+    "DateOfBirth": "1981-09-20T00:00:00",
+    "HireDate": "2015-11-10T00:00:00",
+    "Gender": 0,
+    "Email": "ryan.scott@example.com",
+    "AddressInformation": {
+      "Street": "678 Elm St",
+      "City": "Riverdale",
+      "State": "NJ",
+      "PostalCode": "07457",
+      "Country": "USA"
+    }
+  }
+]

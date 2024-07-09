@@ -1,21 +1,19 @@
-﻿using Healthcare.Application.DTOs.Appointment;
-using Healthcare.Application.DTOs.Common;
-using Healthcare.Application.DTOs.Department;
+﻿using Healthcare.Application.DTOs.Common;
 using Healthcare.Domain.Enumerations;
+using Healthcare.Domain.ValueObjects;
 
 namespace Healthcare.Application.DTOs.Employee;
-public class EmployeeDto : BaseEntityDto
+public class EmployeeDto : BaseDto
 {
-    public string FirstName { get; set; } = string.Empty;
-    public string LastName { get; set; } = string.Empty;
-    public string Phone { get; set; } = string.Empty;
-    public string JobTitle { get; set; } = string.Empty;
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public PhoneNumber? Phone { get; set; }
+    public string? JobTitle { get; set; }
     public decimal Salary { get; set; }
     public DateTime DateOfBirth { get; set; }
     public DateTime HireDate { get; set; }
     public Gender Gender { get; set; }
-    public string Email { get; set; } = string.Empty;
+    public string? Email { get; set; }
     public string? DepartmentId { get; set; }
-    public DepartmentDto? Department { get; set; }
-    public ICollection<AppointmentDto> Appointments { get; set; } = [];
+    public Address? AddressInformation { get; set; }
 }

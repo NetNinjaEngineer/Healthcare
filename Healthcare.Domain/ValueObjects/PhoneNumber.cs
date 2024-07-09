@@ -1,4 +1,5 @@
 ﻿using Healthcare.Domain.Abstractions;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
 namespace Healthcare.Domain.ValueObjects;
@@ -7,6 +8,7 @@ public class PhoneNumber
 {
     public string Number { get; }
 
+    [JsonConstructor]
     private PhoneNumber(string number)
     {
         Number = number;

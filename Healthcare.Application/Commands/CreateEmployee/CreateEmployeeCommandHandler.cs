@@ -11,9 +11,9 @@ namespace Healthcare.Application.Commands.CreateEmployee;
 public sealed class CreateEmployeeCommandHandler(
     IUnitOfWork unitOfWork,
     IMapper mapper
-    ) : IRequestHandler<CreateEmployeeCommand, Result<EmployeeForListDto>>
+    ) : IRequestHandler<CreateEmployeeCommand, Result<EmployeeDto>>
 {
-    public async Task<Result<EmployeeForListDto>> Handle(
+    public async Task<Result<EmployeeDto>> Handle(
         CreateEmployeeCommand request,
         CancellationToken cancellationToken)
     {
@@ -21,13 +21,13 @@ public sealed class CreateEmployeeCommandHandler(
 
         Result<Employee> employeeResult = ValidateAndCreateEmployee(request);
         if (employeeResult.IsFailure)
-            return Result<EmployeeForListDto>.Failure(employeeResult.Error);
+            return Result<EmployeeDto>.Failure(employeeResult.Error);
 
         Result<bool> result = await Save(unitOfWork, employeeResult.Value);
 
         return result.IsFailure ?
-            Result<EmployeeForListDto>.Failure(result.Error) :
-            Result<EmployeeForListDto>.Success(mapper.Map<EmployeeForListDto>(employeeResult.Value));
+            Result<EmployeeDto>.Failure(result.Error) :
+            Result<EmployeeDto>.Success(mapper.Map<EmployeeDto>(employeeResult.Value));
     }
 
     private static async Task<Result<bool>> Save(IUnitOfWork unitOfWork, Employee employee)
@@ -89,6 +89,7 @@ public sealed class CreateEmployeeCommandHandler(
     private static Result<Employee> CreateEmployee(CreateEmployeeCommand command)
     {
         Result<Employee> employeeResult = Employee.Create(
+            Guid.NewGuid().ToString(),
             command.Employee.FirstName,
             command.Employee.LastName,
             PhoneNumber.Create(command.Employee.Phone!).Value,

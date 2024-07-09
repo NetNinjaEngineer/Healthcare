@@ -17,6 +17,11 @@ public class Result<T>
         return new Result<T>(true, value, Error.None);
     }
 
+    public static Result<T> Success()
+    {
+        return new Result<T>(true, default!, Error.None);
+    }
+
     public static Result<T> Failure(Error error)
     {
         return new Result<T>(false, default!, error);

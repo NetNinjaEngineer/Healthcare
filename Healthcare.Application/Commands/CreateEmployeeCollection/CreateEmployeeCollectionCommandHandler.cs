@@ -8,15 +8,15 @@ namespace Healthcare.Application.Commands.CreateEmployeeCollection;
 public sealed class CreateEmployeeCollectionCommandHandler(
     IUnitOfWork unitOfWork,
     IMapper mapper)
-    : IRequestHandler<CreateEmployeeCollectionCommand, IEnumerable<EmployeeForListDto>>
+    : IRequestHandler<CreateEmployeeCollectionCommand, IEnumerable<EmployeeDto>>
 {
-    public async Task<IEnumerable<EmployeeForListDto>> Handle(
+    public async Task<IEnumerable<EmployeeDto>> Handle(
         CreateEmployeeCollectionCommand request,
         CancellationToken cancellationToken)
     {
         var employeeCollection = mapper.Map<IEnumerable<Employee>>(request.Employees);
         unitOfWork.EmployeeRepository.CreateCollection(employeeCollection);
         await unitOfWork.CommitAsync();
-        return mapper.Map<IEnumerable<EmployeeForListDto>>(employeeCollection);
+        return mapper.Map<IEnumerable<EmployeeDto>>(employeeCollection);
     }
 }

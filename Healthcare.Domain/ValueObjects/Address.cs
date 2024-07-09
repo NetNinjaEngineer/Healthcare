@@ -1,4 +1,5 @@
 ﻿using Healthcare.Domain.Abstractions;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
 namespace Healthcare.Domain.ValueObjects;
@@ -13,6 +14,7 @@ public class Address : IEquatable<Address>
     public string PostalCode { get; }
     public string Country { get; }
 
+    [JsonConstructor]
     private Address(
         string street,
         string city,

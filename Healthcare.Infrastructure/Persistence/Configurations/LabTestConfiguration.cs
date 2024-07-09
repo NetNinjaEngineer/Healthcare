@@ -8,7 +8,6 @@ public class LabTestConfiguration : IEntityTypeConfiguration<LabTest>
     public void Configure(EntityTypeBuilder<LabTest> builder)
     {
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
         builder.HasOne(x => x.Lab)
             .WithMany(x => x.LabTests)
             .HasForeignKey(x => x.LabId)

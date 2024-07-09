@@ -2,6 +2,6 @@
 using MediatR;
 
 namespace Healthcare.Application.Queries.GetAllPatients;
-public sealed class GetAllPatientsQuery : IRequest<IEnumerable<PatientForListDto>>
+public sealed class GetAllPatientsQuery : IRequest<IEnumerable<PatientDto>>
 {
 }

@@ -7,9 +7,11 @@ using Healthcare.Infrastructure.Persistence.SeedWork;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
+#region Configure Services - Add Services To The Container
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add(new ProducesResponseTypeAttribute(StatusCodes.Status400BadRequest));
@@ -56,19 +58,28 @@ builder.Services.Configure<FormOptions>(options =>
     options.ValueLengthLimit = int.MaxValue;
     options.MemoryBufferThreshold = int.MaxValue;
 });
+#endregion
 
 var app = builder.Build();
+
+using var scope = app.Services.CreateScope();
+var loggerFactory = scope.ServiceProvider.GetService<ILoggerFactory>();
+try
+{
+    var databaseContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await databaseContext.Database.MigrateAsync();
+    await SeedDatabase.SeedAsync(databaseContext);
+}
+catch (Exception ex)
+{
+    var logger = loggerFactory?.CreateLogger<Program>();
+    logger?.LogError(ex, "An error occured during applying the migrations.");
+}
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
-
-using (var scope = app.Services.CreateScope())
-{
-    var databaseContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    await SeedDatabase.Seed(databaseContext);
 }
 
 app.UseStaticFiles();

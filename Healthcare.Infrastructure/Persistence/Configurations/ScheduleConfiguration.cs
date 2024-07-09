@@ -10,8 +10,6 @@ public class ScheduleConfiguration : IEntityTypeConfiguration<Schedule>
     {
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
-
         builder.Property(x => x.Title)
             .HasConversion(
                 x => x.ToString(),

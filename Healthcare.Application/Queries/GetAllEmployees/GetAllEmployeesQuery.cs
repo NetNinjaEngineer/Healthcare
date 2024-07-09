@@ -2,6 +2,6 @@
 using MediatR;
 
 namespace Healthcare.Application.Queries.GetAllEmployees;
-public sealed class GetAllEmployeesQuery : IRequest<IEnumerable<EmployeeForListDto>>
+public sealed class GetAllEmployeesQuery : IRequest<IEnumerable<EmployeeDto>>
 {
 }
