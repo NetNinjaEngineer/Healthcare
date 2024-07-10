@@ -2,16 +2,18 @@
 
 public class Pagination<T>
 {
+    public PaginationMetaData PaginationMetaData { get; set; }
     public Pagination(int pageNumber, int pageSize, int totalCount, IReadOnlyList<T> data)
     {
-        PageNumber = pageNumber;
-        PageSize = pageSize;
-        TotalCount = totalCount;
         Data = data;
+        PaginationMetaData = new()
+        {
+            CurrentPage = pageNumber,
+            PageSize = pageSize,
+            TotalCount = totalCount,
+            TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize),
+        };
     }
 
-    public int PageNumber { get; set; }
-    public int PageSize { get; set; }
-    public int TotalCount { get; set; }
     public IReadOnlyList<T> Data { get; set; } = [];
 }

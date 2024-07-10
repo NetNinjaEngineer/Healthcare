@@ -13,6 +13,7 @@ using Healthcare.Domain.Entities;
 using Healthcare.Domain.Specifications;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace Healthcare.Api.Controllers;
 [ApiVersion("1.0")]
@@ -37,7 +38,9 @@ public class EmployeesController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(Pagination<EmployeeDto>), StatusCodes.Status200OK)]
     public async Task<ActionResult<Pagination<EmployeeDto>>> GetEmployees([FromQuery] EmployeeSpecParams employeeSpecParams)
     {
-        return Ok(await mediator.Send(new GetAllEmployeesQuery() { EmployeeSpecParams = employeeSpecParams }));
+        var pagedResult = await mediator.Send(new GetAllEmployeesQuery() { EmployeeSpecParams = employeeSpecParams });
+        Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(pagedResult.PaginationMetaData));
+        return Ok(pagedResult);
     }
 
     [HttpGet("{id}", Name = "GetEmployee")]
