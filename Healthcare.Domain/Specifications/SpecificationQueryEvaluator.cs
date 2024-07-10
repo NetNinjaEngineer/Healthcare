@@ -13,6 +13,16 @@ public static class SpecificationQueryEvaluator<T> where T : BaseEntity
         if (specification.Criteria is not null)
             query = query.Where(specification.Criteria);
 
+        if (specification.OrderBy is not null)
+            query = query.OrderBy(specification.OrderBy);
+
+        if (specification.OrderByDescending is not null)
+            query = query.OrderByDescending(specification.OrderByDescending);
+
+        if (specification.IsPaginationEnabled)
+            query = query.Skip(specification.Skip).Take(specification.Take);
+
+
         if (specification.Includes is not null)
             query = specification.Includes.Aggregate(query,
                 (currentQuery, includeExpression) => currentQuery.Include(includeExpression));

@@ -5,10 +5,12 @@ using Healthcare.Application.Commands.DeleteEmployee;
 using Healthcare.Application.Commands.UpdateEmployee;
 using Healthcare.Application.DTOs.Employee;
 using Healthcare.Application.Filters;
+using Healthcare.Application.Helpers;
 using Healthcare.Application.Queries.GetAllEmployees;
 using Healthcare.Application.Queries.GetEmployeeDetails;
 using Healthcare.Domain.Abstractions;
 using Healthcare.Domain.Entities;
+using Healthcare.Domain.Specifications;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,9 +34,11 @@ public class EmployeesController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<EmployeeDto>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetEmployees()
-        => Ok(await mediator.Send(new GetAllEmployeesQuery()));
+    [ProducesResponseType(typeof(Pagination<EmployeeDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<Pagination<EmployeeDto>>> GetEmployees([FromQuery] EmployeeSpecParams employeeSpecParams)
+    {
+        return Ok(await mediator.Send(new GetAllEmployeesQuery() { EmployeeSpecParams = employeeSpecParams }));
+    }
 
     [HttpGet("{id}", Name = "GetEmployee")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

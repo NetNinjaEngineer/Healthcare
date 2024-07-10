@@ -16,7 +16,7 @@ public class GenericRepository<TEntity>(ApplicationDbContext context)
 
     public void Delete(TEntity entity) => context.Remove(entity);
 
-    public async Task<IEnumerable<TEntity>> GetAllAsync()
+    public async Task<IReadOnlyList<TEntity>> GetAllAsync()
         => await context.Set<TEntity>().ToListAsync();
 
     public async Task<TEntity> GetByIdAsync(string id)
@@ -24,8 +24,14 @@ public class GenericRepository<TEntity>(ApplicationDbContext context)
 
     public void Update(TEntity entity) => context.Update(entity);
 
-    public async Task<IEnumerable<TEntity>> GetAllWithSpecificationAsync(ISpecification<TEntity> specification)
+    public async Task<IReadOnlyList<TEntity>> GetAllWithSpecificationAsync(ISpecification<TEntity> specification)
         => await SpecificationQueryEvaluator<TEntity>.GetQuery(context.Set<TEntity>(), specification).ToListAsync();
     public async Task<TEntity?> GetByIdWithSpecificationAsync(string id, ISpecification<TEntity> specification)
         => await SpecificationQueryEvaluator<TEntity>.GetQuery(context.Set<TEntity>(), specification).FirstOrDefaultAsync(x => x.Id == id);
+
+    public async Task<int> GetCountWithSpecificationAsync(ISpecification<TEntity> specification)
+    {
+        var result = await SpecificationQueryEvaluator<TEntity>.GetQuery(context.Set<TEntity>(), specification).ToListAsync();
+        return result.Count;
+    }
 }
